@@ -1,8 +1,9 @@
 export interface IThemeConfig {
-    layout?: "common" | "Comprehensive" | "vertical"
+    layout?: "Common" | "Comprehensive" | "Vertical"
     device?: "desktop" | "mobile"
     collapsed?: boolean
     showTabs?: boolean
+    showTabsBarIcon?: boolean
     tabsBarStyle?: "smooth" | "cars" | "smart"
     showBreadcrumb?: boolean
     showBreadcrumbIcon?: boolean

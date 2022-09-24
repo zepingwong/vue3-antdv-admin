@@ -50,13 +50,14 @@
 </template>
 
 <script lang="ts" setup>
+import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
 import HeaderContent from "@/layout/components/HeaderContent/index.vue"
 import { UserOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
 import { computed, onBeforeMount, ref, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
-import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
+
 const store = useStore()
 const route = useRoute()
 const router = useRouter()

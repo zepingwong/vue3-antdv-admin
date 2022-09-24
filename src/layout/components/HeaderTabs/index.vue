@@ -12,7 +12,10 @@
             <a-tab-pane v-for="(item, index) in tabList" :key="item.name" :closable="item.affix !== true">
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
-                        <div style="display: inline-block">{{ item.title }}</div>
+                        <div style="display: inline-block">
+                            <cloud-outlined v-if="store.state.theme.showTabsBarIcon"></cloud-outlined>
+                            {{ item.title }}
+                        </div>
                         <template #overlay>
                             <a-menu @click="handleOption(item, index, $event)">
                                 <a-menu-item key="current">关闭当前标签</a-menu-item>
@@ -31,6 +34,7 @@
 <script lang="ts" setup>
 import { computed, ref, watch, ComputedRef, onBeforeMount } from "vue"
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
+import { CloudOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
 import { ITab } from "@/types/ITab"
 const store = useStore()
@@ -140,6 +144,9 @@ const handleDelete = (targetKey: string, action: string) => {
     &:before {
       border none
     }
+  }
+  :deep(.anticon) {
+    margin-right 0
   }
   :deep(.ant-tabs-nav-operations) {
     display none
