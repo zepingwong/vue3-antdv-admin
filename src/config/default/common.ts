@@ -1,7 +1,7 @@
 /**
  * 默认常规设置
  */
-export default {
+export const defaultCommon = {
     // 标题，此项修改后需要重启项目 (包括初次加载雪花屏的标题 页面的标题 浏览器的标题)
     websiteTitle: "vue3-admin",
     // 标题分隔符

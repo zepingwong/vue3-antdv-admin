@@ -1,3 +1,4 @@
 export interface IThemeConfig {
-    layout?: "common" | "comprehensive"
+    layout?: "common" | "comprehensive" | "vertical"
+    device?: "desktop" | "mobile"
 }

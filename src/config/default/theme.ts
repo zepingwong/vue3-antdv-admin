@@ -3,8 +3,6 @@
  */
 import { IThemeConfig } from "@/types/IThemeConfig"
 
-const defaultTheme: IThemeConfig = {
+export const defaultTheme: IThemeConfig = {
     layout: "comprehensive"
 }
-
-export default defaultTheme

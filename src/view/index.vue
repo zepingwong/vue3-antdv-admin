@@ -2,11 +2,11 @@
     <div
         :class="{
             'layout-wrapper': true,
-            mobile: store.state.config.device === 'mobile'
+            mobile: store.state.theme.device === 'mobile'
         }"
     >
         <component
-          :is="`${store.state.config.theme.layout}-layout`"
+          :is="`${store.state.theme.layout}-layout`"
         />
     </div>
 </template>
