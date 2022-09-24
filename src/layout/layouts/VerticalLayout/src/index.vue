@@ -79,7 +79,6 @@ watch(
 </script>
 
 <style lang="stylus" scoped>
-
 .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.3);

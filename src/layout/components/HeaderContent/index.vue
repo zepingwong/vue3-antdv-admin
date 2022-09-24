@@ -39,12 +39,11 @@ const store = useStore()
   }
 
   .left-panel {
-    display: flex;
-    align-items: center;
-    justify-items: center;
+    display flex
+    align-items center
+    justify-items center
     line-height 64px
     box-sizing border-box
-
   }
 
   .right-panel {

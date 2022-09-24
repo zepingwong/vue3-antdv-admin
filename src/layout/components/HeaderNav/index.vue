@@ -1,7 +1,15 @@
 <template>
     <div class="header-nav">
-        <!--侧边栏开关-->
-        <header-toggle></header-toggle>
+        <div class="left-panel">
+            <!--侧边栏开关-->
+            <header-toggle></header-toggle>
+            <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="light" mode="horizontal">
+                <a-menu-item v-for="item in parentRoute" :key="item.name">
+                    <router-link :to="item.path">{{ item.meta.title }}</router-link>
+                </a-menu-item>
+            </a-menu>
+        </div>
+
         <div class="right-panel">
             <!--主题设置-->
             <theme-drawer></theme-drawer>
@@ -15,6 +23,14 @@
 import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
 import HeaderToggle from "@/layout/components/HeaderToggle/index.vue"
+import { computed, ref } from "vue"
+import { useRouter } from "vue-router"
+const router = useRouter()
+const selectedKeys = ref(["Root"])
+const openKeys = ref(["Root"])
+const parentRoute = computed(() => {
+    return router.options.routes.filter((item) => item.children)
+})
 </script>
 
 <style lang="stylus" scoped>
@@ -23,6 +39,15 @@ import HeaderToggle from "@/layout/components/HeaderToggle/index.vue"
   box-sizing border-box
   display flex
   padding 0 24px
+
+  .left-panel {
+    display flex
+    align-items center
+    justify-items center
+    line-height 64px
+    box-sizing border-box
+  }
+
   .right-panel {
     line-height 64px
     position absolute
