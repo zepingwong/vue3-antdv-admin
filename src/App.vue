@@ -1,12 +1,18 @@
 <template>
-    <router-view v-slot="{ Component, route }">
-        <component :is="Component" v-if="route.meta.noKeepAlive" />
-        <keep-alive v-else>
-            <component :is="Component" />
-        </keep-alive>
-    </router-view>
+    <div
+        id="app"
+        :class="{
+            'layout-wrapper': true,
+            mobile: store.state.theme.device === 'mobile'
+        }"
+    >
+        <component :is="`${store.state.theme.layout}Layout`" />
+    </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useStore } from "vuex"
+const store = useStore()
+</script>
 
 <style scoped></style>

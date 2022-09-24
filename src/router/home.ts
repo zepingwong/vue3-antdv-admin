@@ -1,10 +1,7 @@
-import Layout from "@/views/index/index.vue"
-
 const home = [
     {
         path: "/",
         name: "Root",
-        component: Layout,
         redirect: "/home",
         meta: {
             hidden: false,

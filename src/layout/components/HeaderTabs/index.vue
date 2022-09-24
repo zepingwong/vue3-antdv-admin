@@ -45,7 +45,7 @@ const tabList: ComputedRef<ITab[]> = computed(() => {
  * */
 const initAffixTabs = (routes: readonly RouteRecordRaw[]) => {
     routes.forEach((route) => {
-        if (route.meta && route.meta.affix) {
+        if (route.meta && route.meta?.title && route.meta.affix) {
             addTab({
                 name: route.name as string,
                 fullPath: route.path as string,
@@ -64,7 +64,7 @@ const addTab = (tab: ITab) => {
 }
 onBeforeMount(() => {
     initAffixTabs(router.options.routes)
-    if (route.meta.affix !== true) {
+    if (route.meta && route.meta?.title && route.meta.affix !== true) {
         addTab({
             name: route.name as string,
             fullPath: route.path as string,
