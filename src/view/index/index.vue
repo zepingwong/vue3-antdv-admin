@@ -6,7 +6,7 @@
         }"
     >
         <component
-          :is="`${store.state.theme.layout}-layout`"
+          :is="`${store.state.theme.layout}Layout`"
         />
     </div>
 </template>

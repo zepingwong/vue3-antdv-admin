@@ -1,13 +1,8 @@
 <!--综合布局 -->
 <template>
-    <div
-        :class="{
-            fixed: fixedHeader,
-            'no-tabs-bar': !showTabs,
-            'element-layout-comprehensive': true
-        }"
-    >
-    </div>
+    <a-layout>
+      <a-layout-sider></a-layout-sider>
+    </a-layout>
 </template>
 
 <script lang="ts" setup>
