@@ -5,7 +5,7 @@
             type="editable-card"
             :tab-bar-gutter="-16"
             hide-add
-            class="header-tabs-content-smooth"
+            :class="`header-tabs-content-${store.state.theme.tabsBarStyle}`"
             @tab-click="handleClick"
             @edit="handleDelete"
         >
@@ -125,6 +125,7 @@ const handleDelete = (targetKey: string, action: string) => {
 
 <style scoped lang="stylus">
 .header-tabs {
+  height 44px
   position: relative
   box-sizing: border-box
   display: flex
@@ -134,17 +135,64 @@ const handleDelete = (targetKey: string, action: string) => {
   background-color #FFF
   padding 0 24px
   border-top 2px solid #f6f6f6
+  :deep(.ant-tabs-nav) {
+    margin 0
+    &:before {
+      border none
+    }
+  }
+  :deep(.ant-tabs-nav-operations) {
+    display none
+  }
   .header-tabs-content {
-    &-smooth {
-      :deep(.ant-tabs-nav) {
-        margin 0
-        &:before {
-          border none
+    &-smart {
+      height: $base-tag-item-height;
+      :deep(.ant-tabs-tab) {
+        margin-left 0 !important
+        margin-right 5px
+        height: $base-tag-item-height;
+        line-height: $base-tag-item-height;
+        border: 0;
+        transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+        &:after {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          content: '';
+          background-color: $base-color-blue;
+          transition: $base-transition;
+        }
+        &:hover {
+          background: mix($base-color-white, $base-color-blue, 90%);
+          &:after {
+            width: 100%;
+            transition: $base-transition;
+          }
         }
       }
-      :deep(.ant-tabs-nav-operations) {
-        display none
+      :deep(.ant-tabs-tab-active) {
+        background: mix($base-color-white, $base-color-blue, 90%);
+        &:after {
+          width: 100%;
+          transition: $base-transition;
+        }
       }
+    }
+    &-card {
+      height $base-tag-item-height
+      :deep(.ant-tabs-tab) {
+        height $base-tag-item-height
+        margin-left 0 !important
+        margin-right 5px
+        &-active {
+          border-color #1890ff
+          border-radius 0
+        }
+      }
+    }
+    &-smooth {
       :deep(.ant-tabs-tab) {
         height $base-tag-item-height + 2
         padding 0 20px 0 20px;

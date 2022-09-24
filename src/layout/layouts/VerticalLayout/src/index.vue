@@ -32,10 +32,14 @@
         </a-layout-sider>
         <a-layout>
             <!--头部-->
-            <a-layout-header style="background: #fff; padding: 0">
-                <menu-unfold-outlined v-if="store.state.theme.collapsed" class="trigger" @click="handleSwitchSidebar" />
-                <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
-                <header-tabs></header-tabs>
+            <a-layout-header
+                style="background: #fff; padding: 0"
+                :style="{
+                    height: store.state.theme.showTabs ? '104px' : '64px'
+                }"
+            >
+                <header-content></header-content>
+                <header-tabs v-if="store.state.theme.showTabs"></header-tabs>
             </a-layout-header>
             <!--内容-->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
@@ -47,11 +51,13 @@
 
 <script lang="ts" setup>
 import MainContent from "@/layout/components/MainContent/index.vue"
-import { MenuUnfoldOutlined, UserOutlined, MenuFoldOutlined } from "@ant-design/icons-vue"
+import HeaderContent from "@/layout/components/HeaderContent/index.vue"
+import { UserOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
 import { computed, onBeforeMount, ref, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
+const store = useStore()
 const route = useRoute()
 const router = useRouter()
 const routes = computed(() => {
@@ -59,10 +65,7 @@ const routes = computed(() => {
 })
 const selectedKeys = ref(["Home"])
 const openKeys = ref(["Root"])
-const store = useStore()
-const handleSwitchSidebar = () => {
-    store.dispatch("theme/SWITCH_SIDEBAR")
-}
+
 onBeforeMount(() => {
     selectedKeys.value[0] = route.name as string
 })
@@ -75,20 +78,6 @@ watch(
 </script>
 
 <style lang="stylus" scoped>
-:deep(.ant-layout-header) {
-  height 108px
-}
-.trigger {
-  font-size 18px
-  line-height 64px
-  padding 0 24px
-  cursor pointer
-  transition: color 0.3s
-
-  &:hover {
-    color: #1890ff
-  }
-}
 
 .logo {
   height: 32px;
