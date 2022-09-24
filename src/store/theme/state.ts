@@ -5,7 +5,9 @@ const state: IThemeConfig = {
     device: "desktop",
     collapsed: false,
     showTabs: true,
-    tabsBarStyle: "smooth"
+    tabsBarStyle: "smooth",
+    showBreadcrumb: true,
+    showBreadcrumbIcon: true
 }
 
 export default state

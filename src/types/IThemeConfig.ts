@@ -4,4 +4,6 @@ export interface IThemeConfig {
     collapsed?: boolean
     showTabs?: boolean
     tabsBarStyle?: "smooth" | "cars" | "smart"
+    showBreadcrumb?: boolean
+    showBreadcrumbIcon?: boolean
 }

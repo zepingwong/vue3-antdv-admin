@@ -7,5 +7,9 @@ export const defaultTheme: IThemeConfig = {
     layout: "Comprehensive",
     showTabs: true,
     // 显示标签页时标签页样式：卡片风格card、灵动风格smart、圆滑风格smooth
-    tabsBarStyle: "smooth"
+    tabsBarStyle: "smooth",
+    // 是否开启面包屑导航
+    showBreadcrumb: true,
+    // 是否显示面包屑导航图标
+    showBreadcrumbIcon: true
 }

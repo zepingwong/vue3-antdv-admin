@@ -1,11 +1,17 @@
 <template>
     <div class="header-content">
-        <menu-unfold-outlined v-if="store.state.theme.collapsed" class="trigger" @click="handleSwitchSidebar" />
-        <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
+        <div class="left-panel">
+            <div>
+                <menu-unfold-outlined v-if="store.state.theme.collapsed" class="trigger" @click="handleSwitchSidebar" />
+                <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
+            </div>
+            <!--面包屑导航-->
+            <header-breadcrumb v-if="store.state.theme.showBreadcrumb"></header-breadcrumb>
+        </div>
         <div class="right-panel">
-          <theme-drawer></theme-drawer>
-          <user-dropdown></user-dropdown>
-
+            <!--主题设置-->
+            <theme-drawer></theme-drawer>
+            <user-dropdown></user-dropdown>
         </div>
     </div>
 </template>
@@ -14,6 +20,7 @@
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
 import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
+import HeaderBreadcrumb from "@/layout/components/HeaderBreadcrumb/index.vue"
 import { useStore } from "vuex"
 const store = useStore()
 const handleSwitchSidebar = () => {
@@ -26,6 +33,13 @@ const handleSwitchSidebar = () => {
   box-sizing border-box
   display flex
   padding 0 24px
+
+  .theme {
+    position absolute
+    line-height 64px
+    font-size 18px
+    right 200px
+  }
   .trigger {
     font-size 18px
     line-height 64px
@@ -35,11 +49,13 @@ const handleSwitchSidebar = () => {
       color: #1890ff
     }
   }
-  .theme {
-    position absolute
+  .left-panel {
+    display: flex;
+    align-items: center;
+    justify-items: center;
     line-height 64px
-    font-size 18px
-    right 200px
+    box-sizing border-box
+
   }
   .right-panel {
     line-height 64px
