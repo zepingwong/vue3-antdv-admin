@@ -3,19 +3,30 @@
         <!--侧边栏-->
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
             <div class="logo" />
-            <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="vertical">
-                <a-menu-item key="1">
-                    <user-outlined />
-                    <span>nav 1</span>
-                </a-menu-item>
-                <a-menu-item key="2">
-                    <video-camera-outlined />
-                    <span>nav 2</span>
-                </a-menu-item>
-                <a-menu-item key="3">
-                    <upload-outlined />
-                    <span>nav 3</span>
-                </a-menu-item>
+            <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="dark" mode="inline">
+                <template v-for="({ meta, children }, parentIndex) in routes" :key="parentIndex">
+                    <a-sub-menu v-if="children.length > 1" :key="`${parentIndex}-1`">
+                        <template #title>
+                            <span>{{ meta.title }}</span>
+                        </template>
+                        <template #icon>
+                            <user-outlined />
+                        </template>
+                        <a-menu-item
+                            v-for="(childrenItem, childrenIndex) in children"
+                            :key="parentIndex + '-' + childrenIndex"
+                            >{{ childrenItem.meta.title }}
+                        </a-menu-item>
+                    </a-sub-menu>
+                    <a-menu-item v-else-if="children.length === 1" :key="`${parentIndex}-2`">
+                        <user-outlined />
+                        {{ meta.title }}
+                    </a-menu-item>
+                    <a-menu-item v-else :key="`${parentIndex}-3`">
+                        <user-outlined />
+                        {{ meta.title }}
+                    </a-menu-item>
+                </template>
             </a-menu>
         </a-layout-sider>
         <a-layout>
@@ -25,25 +36,26 @@
                 <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
             </a-layout-header>
             <!--内容-->
-            <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
-                >Content
+            <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
+                <main-content></main-content>
             </a-layout-content>
         </a-layout>
     </a-layout>
 </template>
 
 <script lang="ts" setup>
-import {
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    MenuFoldOutlined
-} from "@ant-design/icons-vue"
+import MainContent from "@/layout/components/MainContent/index.vue"
+import { MenuUnfoldOutlined, UserOutlined, MenuFoldOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
-import { ref } from "vue"
+import { computed, ref } from "vue"
+import { useRouter } from "vue-router"
 
+const router = useRouter()
+const routes = computed(() => {
+    return router.options.routes
+})
 const selectedKeys = ref(["1"])
+const openKeys = ref(["1"])
 const store = useStore()
 const handleSwitchSidebar = () => {
     store.dispatch("theme/SWITCH_SIDEBAR")
@@ -57,10 +69,12 @@ const handleSwitchSidebar = () => {
   padding 0 24px
   cursor pointer
   transition: color 0.3s
+
   &:hover {
     color: #1890ff
   }
 }
+
 .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.3);

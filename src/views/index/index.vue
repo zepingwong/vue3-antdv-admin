@@ -5,9 +5,7 @@
             mobile: store.state.theme.device === 'mobile'
         }"
     >
-        <component
-          :is="`${store.state.theme.layout}Layout`"
-        />
+        <component :is="`${store.state.theme.layout}Layout`" />
     </div>
 </template>
 
