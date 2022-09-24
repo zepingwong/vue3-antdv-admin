@@ -1,7 +1,12 @@
 import { createStore } from "vuex"
-import config from "@/store/config"
+import config from "./config"
+import user from "./user"
+import theme from "./theme"
+
 export default createStore({
     modules: {
-        config
+        config,
+        user,
+        theme
     }
 })

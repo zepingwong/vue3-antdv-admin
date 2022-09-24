@@ -1,5 +1,10 @@
 /**
  * 默认主题配置
  */
+import { IThemeConfig } from "@/types/IThemeConfig"
 
-export default {}
+const defaultTheme: IThemeConfig = {
+    layout: "comprehensive"
+}
+
+export default defaultTheme

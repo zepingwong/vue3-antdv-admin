@@ -1,17 +1,19 @@
 <template>
-    <div :class="classObj" class="layout-wrapper"></div>
+    <div
+        :class="{
+            'layout-wrapper': true,
+            mobile: store.state.config.device === 'mobile'
+        }"
+    >
+        <component
+          :is="`${store.state.config.theme.layout}-layout`"
+        />
+    </div>
 </template>
 
 <script lang="ts" setup>
 import { useStore } from "vuex"
-import { computed } from "vue"
-
 const store = useStore()
-const classObj = computed(() => {
-    return {
-        mobile: device.value === "mobile"
-    }
-})
 </script>
 
 <style scoped lang="stylus">
