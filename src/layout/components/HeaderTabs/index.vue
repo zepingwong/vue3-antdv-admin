@@ -148,6 +148,10 @@ const handleDelete = (targetKey: string, action: string) => {
     &-smart {
       height: $base-tag-item-height;
       :deep(.ant-tabs-tab) {
+        .ant-tabs-tab-remove {
+          display none
+          opacity 0
+        }
         margin-left 0 !important
         margin-right 5px
         height: $base-tag-item-height;
@@ -165,6 +169,11 @@ const handleDelete = (targetKey: string, action: string) => {
           transition: $base-transition;
         }
         &:hover {
+          .ant-tabs-tab-remove {
+            display unset
+            opacity 1
+            transition: $base-transition;
+          }
           background: mix($base-color-white, $base-color-blue, 90%);
           &:after {
             width: 100%;
@@ -173,6 +182,10 @@ const handleDelete = (targetKey: string, action: string) => {
         }
       }
       :deep(.ant-tabs-tab-active) {
+        .ant-tabs-tab-remove {
+          display unset
+          opacity 1
+        }
         background: mix($base-color-white, $base-color-blue, 90%);
         &:after {
           width: 100%;

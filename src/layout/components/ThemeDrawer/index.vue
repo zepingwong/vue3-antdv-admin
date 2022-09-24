@@ -11,7 +11,7 @@
             <a-form-item label="是否显示标签栏">
                 <a-switch v-model:checked="theme.showTabs" />
             </a-form-item>
-            <a-form-item label="标签栏风格">
+            <a-form-item v-if="store.state.theme.showTabs" label="标签栏风格">
                 <a-select v-model:value="theme.tabsBarStyle">
                     <a-select-option value="smooth">圆滑风格</a-select-option>
                     <a-select-option value="card">卡片风格</a-select-option>
