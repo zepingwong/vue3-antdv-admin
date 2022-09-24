@@ -4,7 +4,7 @@
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="dark" mode="inline">
-                <template v-for="({ meta, children, path, name }, parentIndex) in routes" :key="parentIndex">
+                <template v-for="({ meta, children, name, path }, parentIndex) in routes" :key="parentIndex">
                     <a-sub-menu v-if="children.length > 1" :key="name">
                         <template #title>
                             <span>{{ meta.title }}</span>
@@ -19,15 +19,11 @@
                             </router-link>
                         </a-menu-item>
                     </a-sub-menu>
-                    <a-menu-item v-else-if="children.length === 1" :key="children[0].name">
-                        <router-link :to="children[0].path">
+                    <a-menu-item v-else :key="children && children.length === 1 ? children[0].name : name">
+                        <template #icon>
                             <user-outlined />
-                            {{ meta.title }}
-                        </router-link>
-                    </a-menu-item>
-                    <a-menu-item v-else :key="`${parentIndex}-3`">
-                        <router-link :to="path">
-                            <user-outlined />
+                        </template>
+                        <router-link :to="children && children.length === 1 ? children[0].path : path">
                             {{ meta.title }}
                         </router-link>
                     </a-menu-item>
