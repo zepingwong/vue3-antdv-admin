@@ -36,6 +36,7 @@
     "no-unreachable": 2, // 不允许可达代码return，throw，continue，和break语句后面还有语句
     "comma-dangle": [2, "never"], // 逗号不使用悬挂
     "comma-spacing": [2, { "before": false, "after": true }], // 逗号间距
-    "comma-style": [2, "last"] // （默认）与数组元素，对象属性或变量声明在同一行之后和同一行需要逗号
+    "comma-style": [2, "last"], // （默认）与数组元素，对象属性或变量声明在同一行之后和同一行需要逗号
+    "vue/multi-word-component-names": "off" // 组件名
   }
 }
