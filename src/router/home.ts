@@ -4,7 +4,6 @@ const home = {
     path: "/",
     name: "Root",
     component: Layout,
-    redirect: "/home",
     hidden: false,
     alwaysShow: false,
     meta: {

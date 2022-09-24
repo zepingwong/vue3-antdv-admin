@@ -73,6 +73,9 @@ const handleSwitchSidebar = () => {
 </script>
 
 <style lang="stylus" scoped>
+:deep(.ant-layout-header) {
+  height 108px
+}
 .trigger {
   font-size 18px
   line-height 64px

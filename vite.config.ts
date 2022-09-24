@@ -37,6 +37,14 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
                 }
             }
         },
+        css: {
+            preprocessorOptions: {
+                stylus: {
+                    // https://stackoverflow.com/questions/73228198/global-variables-stylus-vue-vite
+                    additionalData: `@import "${resolve(__dirname, "src/style/variables.styl")}"`
+                }
+            }
+        },
         build: {
             rollupOptions: {
                 output: {
