@@ -194,12 +194,28 @@ const handleDelete = (targetKey: string, action: string) => {
       }
     }
     &-card {
+
       height $base-tag-item-height
       :deep(.ant-tabs-tab) {
+        .ant-tabs-tab-remove {
+          display none
+          opacity 0
+        }
         height $base-tag-item-height
         margin-left 0 !important
         margin-right 5px
+        &:hover {
+          .ant-tabs-tab-remove {
+            display unset
+            opacity 1
+            transition: $base-transition;
+          }
+        }
         &-active {
+          .ant-tabs-tab-remove {
+            display unset
+            opacity 1
+          }
           border-color #1890ff
           border-radius 0
         }
@@ -207,6 +223,10 @@ const handleDelete = (targetKey: string, action: string) => {
     }
     &-smooth {
       :deep(.ant-tabs-tab) {
+        .ant-tabs-tab-remove {
+          display none
+          opacity 0
+        }
         height $base-tag-item-height + 2
         padding 0 20px 0 20px;
         margin-top ($base-tabs-height/2 - $base-tag-item-height/2 - 2)
@@ -216,6 +236,11 @@ const handleDelete = (targetKey: string, action: string) => {
         background transparent
         transition padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important
         &:hover {
+          .ant-tabs-tab-remove {
+            display unset
+            opacity 1
+            transition: $base-transition;
+          }
           padding: 0 30px 0 30px
           color $base-color-black
           background #dee1e6
@@ -224,6 +249,10 @@ const handleDelete = (targetKey: string, action: string) => {
           -webkit-mask-size: 100% 100%
         }
         &-active {
+          .ant-tabs-tab-remove {
+            display unset
+            opacity 1
+          }
           padding 0 30px 0 30px
           color $base-color-blue
           background mix($base-color-white, $base-color-blue, 90%)
