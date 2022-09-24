@@ -1,47 +1,72 @@
 import Layout from "@/views/index/index.vue"
 
-const home = {
-    path: "/",
-    name: "Root",
-    component: Layout,
-    hidden: false,
-    alwaysShow: false,
-    meta: {
-        title: "首页",
-        isCustomSvg: true,
-        icon: "home",
-        roles: [],
-        badge: "",
-        dot: false,
-        tabHidden: false,
-        dynamicNewTab: false,
-        noKeepAlive: false,
-        activeMenu: false
-    },
-    children: [
-        {
-            path: "home",
-            name: "Home",
-            component: () => import("@/views/home/home.vue"),
+const home = [
+    {
+        path: "/",
+        name: "Root",
+        component: Layout,
+        redirect: "/home",
+        meta: {
             hidden: false,
             alwaysShow: false,
-            redirect: "",
-            meta: {
-                affix: true,
-                title: "首页",
-                isCustomSvg: true,
-                icon: "home",
-                roles: [],
-                badge: "",
-                dot: false,
-                tabHidden: false,
-                dynamicNewTab: false,
-                noKeepAlive: false,
-                activeMenu: false
+            title: "首页",
+            isCustomSvg: true,
+            icon: "home",
+            roles: [],
+            badge: "",
+            dot: false,
+            tabHidden: false,
+            dynamicNewTab: false,
+            noKeepAlive: false,
+            activeMenu: false
+        },
+        children: [
+            {
+                path: "home",
+                name: "Home",
+                component: () => import("@/views/home/home.vue"),
+                redirect: "",
+                meta: {
+                    alwaysShow: false,
+                    hidden: false,
+                    affix: true,
+                    title: "首页",
+                    isCustomSvg: true,
+                    icon: "home",
+                    roles: [],
+                    badge: "",
+                    dot: false,
+                    tabHidden: false,
+                    dynamicNewTab: false,
+                    noKeepAlive: false,
+                    activeMenu: false
+                },
+                children: []
             },
-            children: []
-        }
-    ]
-}
+            {
+                path: "workbench",
+                name: "Workbench",
+                component: () => import("@/views/home/workbench.vue"),
+                redirect: "",
+                meta: {
+                    alwaysShow: false,
+                    hidden: false,
+                    affix: false,
+                    title: "工作台",
+                    isCustomSvg: true,
+                    icon: "home",
+                    roles: [],
+                    badge: "",
+                    dot: false,
+                    tabHidden: false,
+                    dynamicNewTab: false,
+                    noKeepAlive: false,
+                    activeMenu: false
+                },
+                children: []
+            }
+        ]
+    }
+]
 
 export default home

@@ -4,25 +4,22 @@
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="dark" mode="inline">
-                <template v-for="({ meta, children, path }, parentIndex) in routes" :key="parentIndex">
-                    <a-sub-menu v-if="children.length > 1" :key="`${parentIndex}-1`">
+                <template v-for="({ meta, children, path, name }, parentIndex) in routes" :key="parentIndex">
+                    <a-sub-menu v-if="children.length > 1" :key="name">
                         <template #title>
                             <span>{{ meta.title }}</span>
                         </template>
                         <template #icon>
                             <user-outlined />
                         </template>
-                        <a-menu-item
-                            v-for="(childrenItem, childrenIndex) in children"
-                            :key="parentIndex + '-' + childrenIndex"
-                        >
+                        <a-menu-item v-for="childrenItem in children" :key="childrenItem.name">
                             <router-link :to="childrenItem.path">
                                 <user-outlined />
                                 {{ childrenItem.meta.title }}
                             </router-link>
                         </a-menu-item>
                     </a-sub-menu>
-                    <a-menu-item v-else-if="children.length === 1" :key="`${parentIndex}-2`">
+                    <a-menu-item v-else-if="children.length === 1" :key="children[0].name">
                         <router-link :to="children[0].path">
                             <user-outlined />
                             {{ meta.title }}
@@ -56,20 +53,29 @@
 import MainContent from "@/layout/components/MainContent/index.vue"
 import { MenuUnfoldOutlined, UserOutlined, MenuFoldOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
-import { computed, ref } from "vue"
-import { useRouter } from "vue-router"
+import { computed, onBeforeMount, ref, watch } from "vue"
+import { useRouter, useRoute } from "vue-router"
 import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
-
+const route = useRoute()
 const router = useRouter()
 const routes = computed(() => {
     return router.options.routes
 })
-const selectedKeys = ref(["1"])
-const openKeys = ref(["1"])
+const selectedKeys = ref(["Home"])
+const openKeys = ref(["Root"])
 const store = useStore()
 const handleSwitchSidebar = () => {
     store.dispatch("theme/SWITCH_SIDEBAR")
 }
+onBeforeMount(() => {
+    selectedKeys.value[0] = route.name as string
+})
+watch(
+    () => route.path,
+    () => {
+        selectedKeys.value[0] = route.name as string
+    }
+)
 </script>
 
 <style lang="stylus" scoped>
