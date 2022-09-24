@@ -5,6 +5,7 @@ declare module "vue-router" {
         // 是可选的
         isAdmin?: boolean
         badge?: string
+        affix?: boolean // tab 固定
         dot: boolean
         tabHidden: boolean
         dynamicNewTab: boolean

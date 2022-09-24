@@ -4,7 +4,7 @@
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="dark" mode="inline">
-                <template v-for="({ meta, children }, parentIndex) in routes" :key="parentIndex">
+                <template v-for="({ meta, children, path }, parentIndex) in routes" :key="parentIndex">
                     <a-sub-menu v-if="children.length > 1" :key="`${parentIndex}-1`">
                         <template #title>
                             <span>{{ meta.title }}</span>
@@ -15,16 +15,24 @@
                         <a-menu-item
                             v-for="(childrenItem, childrenIndex) in children"
                             :key="parentIndex + '-' + childrenIndex"
-                            >{{ childrenItem.meta.title }}
+                        >
+                            <router-link :to="childrenItem.path">
+                                <user-outlined />
+                                {{ childrenItem.meta.title }}
+                            </router-link>
                         </a-menu-item>
                     </a-sub-menu>
                     <a-menu-item v-else-if="children.length === 1" :key="`${parentIndex}-2`">
-                        <user-outlined />
-                        {{ meta.title }}
+                        <router-link :to="children[0].path">
+                            <user-outlined />
+                            {{ meta.title }}
+                        </router-link>
                     </a-menu-item>
                     <a-menu-item v-else :key="`${parentIndex}-3`">
-                        <user-outlined />
-                        {{ meta.title }}
+                        <router-link :to="path">
+                            <user-outlined />
+                            {{ meta.title }}
+                        </router-link>
                     </a-menu-item>
                 </template>
             </a-menu>
@@ -34,6 +42,7 @@
             <a-layout-header style="background: #fff; padding: 0">
                 <menu-unfold-outlined v-if="store.state.theme.collapsed" class="trigger" @click="handleSwitchSidebar" />
                 <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
+                <header-tabs></header-tabs>
             </a-layout-header>
             <!--内容-->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
@@ -49,6 +58,7 @@ import { MenuUnfoldOutlined, UserOutlined, MenuFoldOutlined } from "@ant-design/
 import { useStore } from "vuex"
 import { computed, ref } from "vue"
 import { useRouter } from "vue-router"
+import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 
 const router = useRouter()
 const routes = computed(() => {
