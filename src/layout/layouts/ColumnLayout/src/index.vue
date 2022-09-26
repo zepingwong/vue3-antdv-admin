@@ -4,14 +4,21 @@
         <a-layout-sider
             :trigger="null"
             :class="{
-                fold: store.state.theme.collapsed,
+                fold: store.state.theme.collapsed && store.state.theme.columnStyle !== 'horizontal',
+                foldh: store.state.theme.collapsed && store.state.theme.columnStyle === 'horizontal',
                 unfold: !store.state.theme.collapsed
             }"
         >
-            <column-bar style="width: 64px"></column-bar>
-            <sidebar-menu
-                style="width: 200px; background-color: #ffffff; border-right: 1px solid #f0f0f0"
+            <column-bar
                 :style="{
+                    width: store.state.theme.columnStyle === 'horizontal' ? '84px' : '64px',
+                    'background-color': 'rgba(0, 0, 0, 0.85)'
+                }"
+            ></column-bar>
+            <sidebar-menu
+                style="background-color: #ffffff; border-right: 1px solid #f0f0f0"
+                :style="{
+                    width: store.state.theme.columnStyle === 'horizontal' ? '180px' : '200px',
                     transform: store.state.theme.collapsed ? 'translateX(-264px)' : 'translateX(0)'
                 }"
             ></sidebar-menu>
@@ -63,6 +70,15 @@ const store = useStore()
   min-width 64px !important
   flex 0 0 64px !important
   width 64px !important
+  .ant-layout-sider-children {
+    display flex
+  }
+}
+:deep(.foldh) {
+  max-width 84px !important
+  min-width 84px !important
+  flex 0 0 84px !important
+  width 84px !important
   .ant-layout-sider-children {
     display flex
   }

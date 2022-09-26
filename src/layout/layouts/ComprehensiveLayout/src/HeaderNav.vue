@@ -3,7 +3,7 @@
         <div class="left-panel">
             <!--侧边栏开关-->
             <header-toggle></header-toggle>
-            <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="light" mode="horizontal">
+            <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
                         <a-icon :type="item.meta.icon"></a-icon>
@@ -32,7 +32,6 @@ import { useRouter, useRoute } from "vue-router"
 const router = useRouter()
 const route = useRoute()
 const selectedKeys = ref(["Root"])
-const openKeys = ref(["Root"])
 const parentRoute = computed(() => {
     return router.options.routes.filter((item) => item.children)
 })

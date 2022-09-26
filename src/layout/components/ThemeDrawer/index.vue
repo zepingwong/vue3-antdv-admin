@@ -34,6 +34,15 @@
             <a-form-item v-if="theme.showBreadcrumb" label="面包屑是否显示图标">
                 <a-switch v-model:checked="theme.showBreadcrumbIcon" />
             </a-form-item>
+
+            <a-form-item v-if="store.state.theme.columnStyle" label="分栏风格">
+                <a-select v-model:value="theme.columnStyle">
+                    <a-select-option value="vertical">纵向</a-select-option>
+                    <a-select-option value="horizontal">横向</a-select-option>
+                    <a-select-option value="card">卡片</a-select-option>
+                    <a-select-option value="arrow">箭头</a-select-option>
+                </a-select>
+            </a-form-item>
         </a-form>
     </a-drawer>
 </template>
