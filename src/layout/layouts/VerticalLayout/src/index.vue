@@ -2,33 +2,7 @@
     <a-layout style="height: 100%">
         <!--侧边栏-->
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
-            <div class="logo" />
-            <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="dark" mode="inline">
-                <template v-for="({ meta, children, name, path }, parentIndex) in routes" :key="parentIndex">
-                    <a-sub-menu v-if="children.length > 1" :key="name">
-                        <template #title>
-                            <span>{{ meta.title }}</span>
-                        </template>
-                        <template #icon>
-                            <user-outlined />
-                        </template>
-                        <a-menu-item v-for="childrenItem in children" :key="childrenItem.name">
-                            <router-link :to="childrenItem.path">
-                                <user-outlined />
-                                {{ childrenItem.meta.title }}
-                            </router-link>
-                        </a-menu-item>
-                    </a-sub-menu>
-                    <a-menu-item v-else :key="children && children.length === 1 ? children[0].name : name">
-                        <template #icon>
-                            <user-outlined />
-                        </template>
-                        <router-link :to="children && children.length === 1 ? children[0].path : path">
-                            {{ meta.title }}
-                        </router-link>
-                    </a-menu-item>
-                </template>
-            </a-menu>
+            <sidebar-menu></sidebar-menu>
         </a-layout-sider>
         <a-layout>
             <!--头部-->
@@ -53,29 +27,10 @@
 import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
 import HeaderContent from "@/layout/components/HeaderContent/index.vue"
-import { UserOutlined } from "@ant-design/icons-vue"
+import SidebarMenu from "@/layout/components/SidebarMenu/index.vue"
+
 import { useStore } from "vuex"
-import { computed, onBeforeMount, ref, watch } from "vue"
-import { useRouter, useRoute } from "vue-router"
-
 const store = useStore()
-const route = useRoute()
-const router = useRouter()
-const routes = computed(() => {
-    return router.options.routes
-})
-const selectedKeys = ref(["Home"])
-const openKeys = ref(["Root"])
-
-onBeforeMount(() => {
-    selectedKeys.value[0] = route.name as string
-})
-watch(
-    () => route.path,
-    () => {
-        selectedKeys.value[0] = route.name as string
-    }
-)
 </script>
 
 <style lang="stylus" scoped>

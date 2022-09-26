@@ -1,7 +1,7 @@
 import { IThemeConfig } from "@/types/IThemeConfig"
 
 const state: IThemeConfig = {
-    layout: "Comprehensive",
+    layout: "Vertical",
     device: "desktop",
     collapsed: false,
     showTabs: true,

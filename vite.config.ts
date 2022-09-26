@@ -1,6 +1,7 @@
 import { defineConfig, ConfigEnv, loadEnv } from "vite"
 import { resolve } from "path"
 import vue from "@vitejs/plugin-vue"
+import vueJsx from "@vitejs/plugin-vue-jsx"
 import _ from "lodash"
 
 import svgBuilder from "./src/plugins/SvgBuilder"
@@ -25,7 +26,7 @@ const alias: Record<string, string> = {
 const viteConfig = defineConfig((mode: ConfigEnv) => {
     return {
         base: "./", // 等同于  assetsPublicPath :'./'
-        plugins: [vue(), svgBuilder("./src/assets/svg/")],
+        plugins: [vue(), vueJsx(), svgBuilder("./src/assets/svg/")],
         resolve: { alias },
         server: {
             proxy: {
