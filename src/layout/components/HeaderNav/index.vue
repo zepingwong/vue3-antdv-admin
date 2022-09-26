@@ -23,14 +23,21 @@
 import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
 import HeaderToggle from "@/layout/components/HeaderToggle/index.vue"
-import { computed, ref } from "vue"
-import { useRouter } from "vue-router"
+import { computed, ref, watch } from "vue"
+import { useRouter, useRoute } from "vue-router"
 const router = useRouter()
+const route = useRoute()
 const selectedKeys = ref(["Root"])
 const openKeys = ref(["Root"])
 const parentRoute = computed(() => {
     return router.options.routes.filter((item) => item.children)
 })
+watch(
+    () => route.fullPath,
+    () => {
+        selectedKeys.value[0] = route.matched[0].name as string
+    }
+)
 </script>
 
 <style lang="stylus" scoped>

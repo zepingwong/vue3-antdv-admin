@@ -33,10 +33,4 @@ import { useStore } from "vuex"
 const store = useStore()
 </script>
 
-<style lang="stylus" scoped>
-.logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.3);
-  margin: 16px;
-}
-</style>
+<style lang="stylus" scoped></style>

@@ -11,12 +11,27 @@
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
 import { computed, ComputedRef, onBeforeMount, ref, watch } from "vue"
 import CreateMenu from "@/layout/components/SidebarMenu/CreateMenu"
-
+import { useStore } from "vuex"
+const store = useStore()
 const route = useRoute()
 const router = useRouter()
 
 const routes: ComputedRef<readonly RouteRecordRaw[]> = computed(() => {
-    return router.options.routes
+    if (store.state.theme.layout === "Comprehensive") {
+        const index: number = router.options.routes
+            .map((item) => {
+                return item.name
+            })
+            .indexOf(route.matched[0].name as string)
+        if (index !== -1) {
+            const tmp: RouteRecordRaw = router.options.routes[index]
+            return tmp.children ? tmp.children : []
+        } else {
+            return []
+        }
+    } else {
+        return router.options.routes
+    }
 })
 
 const selectedKeys = ref(["Home"])
@@ -33,4 +48,10 @@ watch(
 )
 </script>
 
-<style scoped></style>
+<style lang="stylus" scoped>
+.logo {
+  height 32px
+  background rgba(255, 255, 255, 0.3)
+  margin 16px
+}
+</style>
