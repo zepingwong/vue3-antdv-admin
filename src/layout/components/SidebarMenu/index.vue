@@ -1,7 +1,12 @@
 <template>
     <div>
         <div class="logo" />
-        <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="dark" mode="inline">
+        <a-menu
+            v-model:selectedKeys="selectedKeys"
+            v-model:open-keys="openKeys"
+            :theme="store.state.theme.layout === 'Column' ? 'light' : 'dark'"
+            mode="inline"
+        >
             <create-menu v-for="item in routes" :key="item.name" :router="item"></create-menu>
         </a-menu>
     </div>
@@ -17,7 +22,7 @@ const route = useRoute()
 const router = useRouter()
 
 const routes: ComputedRef<readonly RouteRecordRaw[]> = computed(() => {
-    if (store.state.theme.layout === "Comprehensive") {
+    if (store.state.theme.layout === "Comprehensive" || store.state.theme.layout === "Column") {
         const index: number = router.options.routes
             .map((item) => {
                 return item.name
@@ -50,8 +55,9 @@ watch(
 
 <style lang="stylus" scoped>
 .logo {
-  height 32px
+  height 64px
   background rgba(255, 255, 255, 0.3)
-  margin 16px
+  padding 16px
+  border-right 1px solid #f0f0f0
 }
 </style>

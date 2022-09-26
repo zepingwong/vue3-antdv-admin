@@ -8,7 +8,7 @@ const home = [
             alwaysShow: false,
             title: "表单",
             isCustomSvg: true,
-            icon: "home",
+            icon: "form-outlined",
             roles: [],
             badge: "",
             dot: false,

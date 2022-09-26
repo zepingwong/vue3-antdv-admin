@@ -13,7 +13,7 @@
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
                         <div style="display: inline-block">
-                            <cloud-outlined v-if="store.state.theme.showTabsBarIcon"></cloud-outlined>
+                            <a-icon v-if="store.state.theme.showTabsBarIcon" :type="item.icon"></a-icon>
                             {{ item.title }}
                         </div>
                         <template #overlay>
@@ -32,9 +32,9 @@
 </template>
 
 <script lang="ts" setup>
+import AIcon from "@/components/aicon/index.vue"
 import { computed, ref, watch, ComputedRef, onBeforeMount } from "vue"
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
-import { CloudOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
 import { ITab } from "@/types/ITab"
 const store = useStore()
@@ -54,7 +54,8 @@ const initAffixTabs = (routes: readonly RouteRecordRaw[]) => {
                 name: route.name as string,
                 fullPath: route.path as string,
                 title: route.meta.title,
-                affix: route.meta.affix
+                affix: route.meta.affix,
+                icon: route.meta.icon
             })
         }
         if (route.children && route.children.length !== 0) initAffixTabs(route.children)
@@ -73,7 +74,8 @@ onBeforeMount(() => {
             name: route.name as string,
             fullPath: route.path as string,
             title: route.meta.title,
-            affix: route.meta.affix as boolean
+            affix: route.meta.affix as boolean,
+            icon: route.meta.icon
         })
     }
     activeKey.value = route.name as string
@@ -108,7 +110,8 @@ watch(
                 name: route.name as string,
                 fullPath: route.path as string,
                 title: route.meta.title,
-                affix: route.meta.affix as boolean
+                affix: route.meta.affix as boolean,
+                icon: route.meta.icon
             })
         }
     }

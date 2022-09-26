@@ -8,7 +8,8 @@ const state: IThemeConfig = {
     showTabsBarIcon: true,
     tabsBarStyle: "smooth",
     showBreadcrumb: true,
-    showBreadcrumbIcon: true
+    showBreadcrumbIcon: true,
+    columnStyle: "card"
 }
 
 export default state

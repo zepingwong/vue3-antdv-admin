@@ -3,4 +3,5 @@ export type ITab = {
     title: string
     fullPath: string
     affix: boolean
+    icon: string
 }

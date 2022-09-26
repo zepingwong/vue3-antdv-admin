@@ -12,7 +12,7 @@
                 <a-select v-model:value="theme.layout">
                     <a-select-option value="Vertical">纵向布局</a-select-option>
                     <a-select-option value="Comprehensive">综合布局</a-select-option>
-                    <a-select-option value="smart">分栏布局</a-select-option>
+                    <a-select-option value="Column">分栏布局</a-select-option>
                 </a-select>
             </a-form-item>
             <a-form-item label="是否显示标签栏">

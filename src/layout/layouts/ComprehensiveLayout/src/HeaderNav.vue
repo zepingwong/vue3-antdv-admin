@@ -5,7 +5,10 @@
             <header-toggle></header-toggle>
             <a-menu v-model:selectedKeys="selectedKeys" v-model:open-keys="openKeys" theme="light" mode="horizontal">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
-                    <router-link :to="item.path">{{ item.meta.title }}</router-link>
+                    <router-link :to="item.path">
+                        <a-icon :type="item.meta.icon"></a-icon>
+                        {{ item.meta.title }}
+                    </router-link>
                 </a-menu-item>
             </a-menu>
         </div>
@@ -20,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import AIcon from "@/components/aicon/index.vue"
 import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
 import HeaderToggle from "@/layout/components/HeaderToggle/index.vue"

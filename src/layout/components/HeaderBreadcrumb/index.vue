@@ -2,7 +2,7 @@
     <div class="header-breadcrumb">
         <a-breadcrumb>
             <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">
-              <cloud-outlined v-if="store.state.theme.showBreadcrumbIcon"></cloud-outlined>
+                <a-icon v-if="store.state.theme.showBreadcrumbIcon" :type="item.meta.icon"></a-icon>
                 {{ item.meta.title }}
             </a-breadcrumb-item>
         </a-breadcrumb>
@@ -13,7 +13,7 @@
 import { watch } from "vue"
 import { useStore } from "vuex"
 import { useRoute } from "vue-router"
-import { CloudOutlined } from "@ant-design/icons-vue"
+import AIcon from "@/components/aicon/index.vue"
 const route = useRoute()
 const store = useStore()
 watch(

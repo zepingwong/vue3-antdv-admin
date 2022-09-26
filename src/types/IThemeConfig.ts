@@ -7,4 +7,5 @@ export interface IThemeConfig {
     tabsBarStyle?: "smooth" | "cars" | "smart"
     showBreadcrumb?: boolean
     showBreadcrumbIcon?: boolean
+    columnStyle?: "vertical" | "horizontal" | "card"
 }

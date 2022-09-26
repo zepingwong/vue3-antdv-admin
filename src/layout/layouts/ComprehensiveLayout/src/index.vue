@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import HeaderNav from "@/layout/components/HeaderNav/index.vue"
+import HeaderNav from "@/layout/layouts/ComprehensiveLayout/src/HeaderNav.vue"
 import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import SidebarMenu from "@/layout/components/SidebarMenu/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
