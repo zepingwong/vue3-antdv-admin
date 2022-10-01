@@ -10,18 +10,11 @@
 </template>
 
 <script lang="ts" setup>
-import { watch } from "vue"
 import { useStore } from "vuex"
 import { useRoute } from "vue-router"
 import AIcon from "@/components/aicon/index.vue"
 const route = useRoute()
 const store = useStore()
-watch(
-    () => route.fullPath,
-    () => {
-        console.log(route.matched)
-    }
-)
 </script>
 
 <style lang="stylus" scoped>

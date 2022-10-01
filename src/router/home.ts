@@ -1,4 +1,6 @@
-const home = [
+import { RouteRecordRaw } from "vue-router"
+
+const home: RouteRecordRaw[] = [
     {
         path: "/",
         name: "Root",

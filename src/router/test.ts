@@ -1,4 +1,6 @@
-const home = [
+import { RouteRecordRaw } from "vue-router"
+
+const test: RouteRecordRaw[] = [
     {
         path: "/form",
         name: "Form",
@@ -21,4 +23,4 @@ const home = [
     }
 ]
 
-export default home
+export default test
