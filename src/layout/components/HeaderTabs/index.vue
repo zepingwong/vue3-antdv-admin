@@ -170,7 +170,7 @@ const handleDelete = (targetKey: string, action: string) => {
       height: $base-tag-item-height;
       :deep(.ant-tabs-tab) {
         .ant-tabs-tab-remove {
-          float left
+          width 0
           opacity 0
           margin-left 0
           margin-top 3px
@@ -186,17 +186,17 @@ const handleDelete = (targetKey: string, action: string) => {
         transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
         &:after {
           position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          content: '';
-          background-color: $base-color-blue;
-          transition: $base-transition;
+          bottom 0
+          left 0
+          width 0
+          height 2px
+          content ''
+          background-color $base-color-blue
+          transition $base-transition
         }
         &:hover {
           .ant-tabs-tab-remove {
-            display unset
+            width 26px
             opacity 1
             float right
             transition: $base-transition;
@@ -210,7 +210,7 @@ const handleDelete = (targetKey: string, action: string) => {
       }
       :deep(.ant-tabs-tab-active) {
         .ant-tabs-tab-remove {
-          display unset
+          width 26px
           opacity 1
         }
         background: mix($base-color-white, $base-color-blue, 90%);
@@ -230,7 +230,6 @@ const handleDelete = (targetKey: string, action: string) => {
           margin-left 0
           margin-top 3px
           line-height 20px
-          vertical-align -0.125em
           text-transform none
         }
         height $base-tag-item-height
@@ -238,15 +237,16 @@ const handleDelete = (targetKey: string, action: string) => {
         margin-right 5px
         &:hover {
           .ant-tabs-tab-remove {
-            display unset
+            width 26px
             opacity 1
-            transform translateX(0)
-            transition: $base-transition;
+            transition $base-transition
           }
+          border-color #1890ff
+          border-radius 0
         }
         &-active {
           .ant-tabs-tab-remove {
-            display unset
+            width 26px
             opacity 1
             transform translateX(0)
           }
