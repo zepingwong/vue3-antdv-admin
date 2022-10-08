@@ -3,5 +3,6 @@ export type ITab = {
     title: string
     fullPath: string
     affix: boolean
-    icon: string
+    icon: string,
+    isCustomSvg: boolean
 }

@@ -1,16 +1,16 @@
 <template>
-    <component :is="type" v-if="!custom"></component>
-    <icon-font v-else :type="type"></icon-font>
+    <component :is="type" v-if="!custom" :style="style"></component>
+    <icon-font v-else :type="type" :style="style"></icon-font>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue"
-import * as antIcons from "@ant-design/icons-vue"
-const IconFont = antIcons.createFromIconfontCN({
-    scriptUrl: "//at.alicdn.com/t/c/font_3683886_cjltukdq3jm.js"
+import { HomeOutlined, createFromIconfontCN } from "@ant-design/icons-vue"
+const IconFont = createFromIconfontCN({
+    scriptUrl: "//at.alicdn.com/t/c/font_3683886_brlnn91txej.js"
 })
 export default defineComponent({
     name: "AIcon",
-    components: { antIcons, IconFont },
+    components: { HomeOutlined, IconFont },
     props: {
         type: {
             required: true,
@@ -19,6 +19,10 @@ export default defineComponent({
         custom: {
             type: Boolean,
             default: false
+        },
+        style: {
+            type: Object,
+            default: () => ({})
         }
     }
 })

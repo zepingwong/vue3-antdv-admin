@@ -1,9 +1,8 @@
 <template>
-    <table-plus :columns="columns" :data-source="dataSource"></table-plus>
+    <a-table :columns="columns" :data-source="dataSource"></a-table>
 </template>
 
 <script lang="ts" setup>
-import TablePlus from "@/components/TablePlus/index.vue"
 const columns = [
     {
         title: "Id",

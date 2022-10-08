@@ -10,7 +10,7 @@ const test: RouteRecordRaw[] = [
             alwaysShow: false,
             title: "表单",
             isCustomSvg: true,
-            icon: "form-outlined",
+            icon: "icon-form",
             roles: [],
             badge: "",
             dot: false,

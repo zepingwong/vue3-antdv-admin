@@ -2,7 +2,11 @@
     <div class="header-breadcrumb">
         <a-breadcrumb>
             <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">
-                <a-icon v-if="store.state.theme.showBreadcrumbIcon" :type="item.meta.icon"></a-icon>
+                <a-icon
+                    v-if="store.state.theme.showBreadcrumbIcon"
+                    :custom="item.meta.isCustomSvg"
+                    :type="item.meta.icon"
+                ></a-icon>
                 {{ item.meta.title }}
             </a-breadcrumb-item>
         </a-breadcrumb>
@@ -13,6 +17,7 @@
 import { useStore } from "vuex"
 import { useRoute } from "vue-router"
 import AIcon from "@/components/aicon/index.vue"
+
 const route = useRoute()
 const store = useStore()
 </script>
@@ -23,6 +28,7 @@ const store = useStore()
   line-height 64px
   padding-left 20px
   margin-top -5px
+
   .ant-breadcrumb {
     font-size 16px
     line-height 64px

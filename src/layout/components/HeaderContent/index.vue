@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
-import HeaderToggle from "@/layout/components/HeaderToggle/index.vue"
+import HeaderToggle from "@/layout/components/SidebarToggle/index.vue"
 import HeaderBreadcrumb from "@/layout/components/HeaderBreadcrumb/index.vue"
 import { useStore } from "vuex"
 

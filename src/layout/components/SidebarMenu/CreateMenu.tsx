@@ -15,7 +15,7 @@ export default defineComponent({
         const menuSub = (router: RouteRecordRaw) => {
             const subSlots: Slots = {
                 title: () => [<span>{router.meta?.title}</span>],
-                icon: () => [<aIcon type={router.meta?.icon || "FolderOutlined"} />]
+                icon: () => [<aIcon custom={router.meta?.isCustomSvg} type={router.meta?.icon || "FolderOutlined"} />]
             }
             return (
                 <a-sub-menu v-slots={subSlots} key={router.name}>
@@ -26,7 +26,7 @@ export default defineComponent({
 
         const menuItem = (router: RouteRecordRaw) => {
             const itemSlots: Slots = {
-                icon: () => (router.meta?.icon ? [<aIcon type={router.meta?.icon || ""} />] : [])
+                icon: () => (router.meta?.icon ? [<aIcon custom={router.meta?.isCustomSvg} type={router.meta?.icon || ""} />] : [])
             }
             return (
                 <a-menu-item v-slots={itemSlots} key={router.name}>

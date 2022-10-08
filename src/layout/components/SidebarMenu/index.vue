@@ -1,6 +1,6 @@
 <template>
     <div>
-      <sidebar-logo/>
+        <sidebar-logo />
         <a-menu
             v-model:selectedKeys="selectedKeys"
             v-model:open-keys="openKeys"
@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
 import { computed, ComputedRef, onBeforeMount, ref, watch } from "vue"
+import { constantRouter } from "@/router/constant"
 import CreateMenu from "@/layout/components/SidebarMenu/CreateMenu"
 import SidebarLogo from "@/layout/components/SidebarLogo/index.vue"
 import { useStore } from "vuex"
@@ -23,6 +24,7 @@ const route = useRoute()
 const router = useRouter()
 
 const routes: ComputedRef<readonly RouteRecordRaw[]> = computed(() => {
+    // Comprehensive 和 Column 布局下,侧边栏为子路由
     if (store.state.theme.layout === "Comprehensive" || store.state.theme.layout === "Column") {
         const index: number = router.options.routes
             .map((item) => {
@@ -36,7 +38,10 @@ const routes: ComputedRef<readonly RouteRecordRaw[]> = computed(() => {
             return []
         }
     } else {
-        return router.options.routes
+        return router.options.routes.filter((item) => {
+            // 登录、404等路由不能出现在侧边栏
+            return constantRouter.indexOf(item.path) === -1
+        })
     }
 })
 

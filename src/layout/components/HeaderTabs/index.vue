@@ -10,10 +10,17 @@
             @edit="handleDelete"
         >
             <a-tab-pane v-for="(item, index) in tabList" :key="item.name" :closable="item.affix !== true">
+                <template #closeIcon>
+                  <a-icon custom type="icon-close" style="font-size: 14px"></a-icon>
+                </template>
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
                         <div style="display: inline-block">
-                            <a-icon v-if="store.state.theme.showTabsBarIcon" :type="item.icon"></a-icon>
+                            <a-icon
+                                v-if="store.state.theme.showTabsBarIcon"
+                                :custom="item.isCustomSvg"
+                                :type="item.icon"
+                            ></a-icon>
                             {{ item.title }}
                         </div>
                         <template #overlay>
@@ -55,7 +62,8 @@ const initAffixTabs = (routes: readonly RouteRecordRaw[]) => {
                 fullPath: route.path as string,
                 title: route.meta.title,
                 affix: route.meta.affix,
-                icon: route.meta.icon
+                icon: route.meta.icon,
+                isCustomSvg: route.meta.isCustomSvg
             })
         }
         if (route.children && route.children.length !== 0) initAffixTabs(route.children)
@@ -75,7 +83,8 @@ onBeforeMount(() => {
             fullPath: route.path as string,
             title: route.meta.title,
             affix: route.meta.affix as boolean,
-            icon: route.meta.icon
+            icon: route.meta.icon,
+            isCustomSvg: route.meta.isCustomSvg
         })
     }
     activeKey.value = route.name as string
@@ -111,7 +120,8 @@ watch(
                 fullPath: route.path as string,
                 title: route.meta.title,
                 affix: route.meta.affix as boolean,
-                icon: route.meta.icon
+                icon: route.meta.icon,
+                isCustomSvg: route.meta.isCustomSvg
             })
         }
     }
@@ -155,12 +165,18 @@ const handleDelete = (targetKey: string, action: string) => {
     display none
   }
   .header-tabs-content {
+    // 灵动
     &-smart {
       height: $base-tag-item-height;
       :deep(.ant-tabs-tab) {
         .ant-tabs-tab-remove {
-          display none
+          float left
           opacity 0
+          margin-left 0
+          margin-top 3px
+          line-height 20px
+          vertical-align -0.125em
+          text-transform none
         }
         margin-left 0 !important
         margin-right 5px
@@ -182,6 +198,7 @@ const handleDelete = (targetKey: string, action: string) => {
           .ant-tabs-tab-remove {
             display unset
             opacity 1
+            float right
             transition: $base-transition;
           }
           background: mix($base-color-white, $base-color-blue, 90%);
@@ -203,13 +220,18 @@ const handleDelete = (targetKey: string, action: string) => {
         }
       }
     }
+    // 卡片
     &-card {
-
       height $base-tag-item-height
       :deep(.ant-tabs-tab) {
         .ant-tabs-tab-remove {
-          display none
+          width 0
           opacity 0
+          margin-left 0
+          margin-top 3px
+          line-height 20px
+          vertical-align -0.125em
+          text-transform none
         }
         height $base-tag-item-height
         margin-left 0 !important
@@ -218,6 +240,7 @@ const handleDelete = (targetKey: string, action: string) => {
           .ant-tabs-tab-remove {
             display unset
             opacity 1
+            transform translateX(0)
             transition: $base-transition;
           }
         }
@@ -225,17 +248,23 @@ const handleDelete = (targetKey: string, action: string) => {
           .ant-tabs-tab-remove {
             display unset
             opacity 1
+            transform translateX(0)
           }
           border-color #1890ff
           border-radius 0
         }
       }
     }
+    // 圆滑风格
     &-smooth {
       :deep(.ant-tabs-tab) {
         .ant-tabs-tab-remove {
-          display none
           opacity 0
+          margin-left 0
+          margin-top 3px
+          line-height 20px
+          vertical-align -0.125em
+          text-transform none
         }
         height $base-tag-item-height + 2
         padding 0 20px 0 20px;
@@ -247,7 +276,7 @@ const handleDelete = (targetKey: string, action: string) => {
         transition padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important
         &:hover {
           .ant-tabs-tab-remove {
-            display unset
+            display inline-block
             opacity 1
             transition: $base-transition;
           }

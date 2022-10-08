@@ -6,7 +6,7 @@
             <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
-                        <a-icon :type="item.meta.icon"></a-icon>
+                        <a-icon :custom="item.meta.isCustomSvg" :type="item.meta.icon"></a-icon>
                         {{ item.meta.title }}
                     </router-link>
                 </a-menu-item>
@@ -26,7 +26,7 @@
 import AIcon from "@/components/aicon/index.vue"
 import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
-import HeaderToggle from "@/layout/components/HeaderToggle/index.vue"
+import HeaderToggle from "@/layout/components/SidebarToggle/index.vue"
 import { computed, ref, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
 const router = useRouter()
@@ -45,7 +45,7 @@ watch(
 
 <style lang="stylus" scoped>
 .header-nav {
-  height 64px
+  height 60px
   box-sizing border-box
   display flex
   padding 0 24px
@@ -54,12 +54,12 @@ watch(
     display flex
     align-items center
     justify-items center
-    line-height 64px
+    line-height 58px
     box-sizing border-box
   }
 
   .right-panel {
-    line-height 64px
+    line-height 58px
     position absolute
     right 24px
     display: flex

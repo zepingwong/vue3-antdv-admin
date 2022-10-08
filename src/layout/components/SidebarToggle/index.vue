@@ -17,7 +17,7 @@ const handleSwitchSidebar = () => {
 <style lang="stylus" scoped>
 .trigger {
   font-size 18px
-  line-height 64px
+  line-height 60px
   cursor pointer
   transition: color 0.3s
 
