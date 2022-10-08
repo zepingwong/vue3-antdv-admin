@@ -9,7 +9,7 @@ const IconFont = antIcons.createFromIconfontCN({
     scriptUrl: "//at.alicdn.com/t/c/font_3683886_cjltukdq3jm.js"
 })
 export default defineComponent({
-    name: "Aicon",
+    name: "AIcon",
     components: { antIcons, IconFont },
     props: {
         type: {

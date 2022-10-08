@@ -1,11 +1,12 @@
 import { createRouter, createWebHashHistory } from "vue-router"
 import home from "@/router/home"
 import test from "@/router/test"
-import constant, { constantRouter } from "@/router/constant"
+import table from "@/router/table"
+import constant from "@/router/constant"
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes: [...home, ...test, ...constant]
+    routes: [...home, ...test, ...constant, ...table]
 })
 
 router.beforeEach((to, from, next) => {

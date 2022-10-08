@@ -30,6 +30,7 @@ const store = useStore()
   box-sizing border-box
   display flex
   padding 0 24px
+  height 60px
 
   .theme {
     position absolute

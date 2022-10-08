@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="logo" />
+      <sidebar-logo/>
         <a-menu
             v-model:selectedKeys="selectedKeys"
             v-model:open-keys="openKeys"
@@ -16,6 +16,7 @@
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
 import { computed, ComputedRef, onBeforeMount, ref, watch } from "vue"
 import CreateMenu from "@/layout/components/SidebarMenu/CreateMenu"
+import SidebarLogo from "@/layout/components/SidebarLogo/index.vue"
 import { useStore } from "vuex"
 const store = useStore()
 const route = useRoute()
@@ -52,12 +53,3 @@ watch(
     }
 )
 </script>
-
-<style lang="stylus" scoped>
-.logo {
-  height 64px
-  background rgba(255, 255, 255, 0.3)
-  padding 16px
-  border-right 1px solid #f0f0f0
-}
-</style>
