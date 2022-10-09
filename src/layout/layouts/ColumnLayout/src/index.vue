@@ -29,8 +29,7 @@
                 :style="{
                     height: store.state.theme.showTabs ? '104px' : '64px',
                     background: '#FFFFFF',
-                    padding: 0,
-                    'box-shadow': '0 1px 4px rgba(0, 21, 41, 0.8)'
+                    padding: 0
                 }"
             >
                 <header-content></header-content>

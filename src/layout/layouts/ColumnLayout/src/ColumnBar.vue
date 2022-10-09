@@ -10,6 +10,7 @@
             <a-menu-item v-for="item in parentRoute" :key="item.name">
                 <router-link :to="item.path">
                     <a-icon
+                        :custom="item.meta.isCustomSvg"
                         :type="item.meta.icon"
                         :style="{
                             width: store.state.theme.columnStyle === 'horizontal' ? 'auto' : '100%'

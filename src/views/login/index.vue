@@ -11,14 +11,14 @@
             }"
         >
             <a-form-item label="用户名" name="username">
-                <a-input v-model:value="loginForm.username" autocomplete="off">
+                <a-input v-model:value="loginForm.username" autocomplete="off" size="large">
                     <template #prefix>
                         <user-outlined type="user" />
                     </template>
                 </a-input>
             </a-form-item>
             <a-form-item label="密码" name="password">
-                <a-input v-model:value="loginForm.password" autocomplete="off" type="password">
+                <a-input v-model:value="loginForm.password" autocomplete="off" type="password" size="large">
                     <template #prefix>
                         <a-icon custom type="icon-password" />
                     </template>
@@ -69,5 +69,6 @@ const handleLogin = () => {
 .login-container {
   display flex
   height 100%
+  background-color #f9f9f9
 }
 </style>

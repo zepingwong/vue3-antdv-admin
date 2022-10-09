@@ -6,7 +6,7 @@
 import { defineComponent } from "vue"
 import { HomeOutlined, createFromIconfontCN } from "@ant-design/icons-vue"
 const IconFont = createFromIconfontCN({
-    scriptUrl: "//at.alicdn.com/t/c/font_3683886_brlnn91txej.js"
+    scriptUrl: "//at.alicdn.com/t/c/font_3683886_niguzcsnw3r.js"
 })
 export default defineComponent({
     name: "AIcon",
