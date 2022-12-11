@@ -3,9 +3,30 @@ import store from "@/store"
 import { SET_THEME_DRAWER } from "@/store/theme/mutations"
 import { SET_THEME } from "@/store/theme/actions"
 import { themeSettings } from "../../../configs/theme"
-import { ILayout, ITabsBarStyle } from "#/config"
+import { ILayout, ITabsBarStyle, IThemeName } from "#/config"
+import { ConfigProvider } from "ant-design-vue"
+import { green, red } from "../../../configs/theme"
 
 export const useThemeSetting = () => {
+    // 主题
+    const getTheme = computed<IThemeName>(() => store.state.theme.config.theme)
+    const switchTheme = (themeName: IThemeName) => {
+        switch (themeName) {
+            case "green": {
+                ConfigProvider.config({
+                    theme: green.color
+                })
+                break
+            }
+            case "red": {
+                ConfigProvider.config({
+                    theme: red.color
+                })
+                break
+            }
+        }
+        store.dispatch("theme/" + SET_THEME, { theme: themeName }).then()
+    }
     // 布局
     const getLayout = computed<ILayout>(() => store.state.theme.config.layout || themeSettings.layout)
     const switchLayout = (layout: ILayout) => {
@@ -48,6 +69,8 @@ export const useThemeSetting = () => {
         store.commit("theme/" + SET_THEME_DRAWER, !getThemeDrawerStatus.value)
     }
     return {
+        getTheme, // 当前主题
+        switchTheme, // 切换主题
         getShowTabs, // 是否显示标签栏
         getShowTabsBarIcon, // 标签栏是否显示图标
         switchShowTabs, // 设置是否显示标签栏

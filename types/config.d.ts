@@ -1,6 +1,8 @@
 export type ITabsBarStyle = "smooth" | "card" | "smart"
 export type ILayout = "Common" | "Comprehensive" | "Vertical" | "Column"
+export type IThemeName = "green" | "default" | "white" | "red"
 export interface IThemeConfig {
+    theme?: IThemeName
     layout?: ILayout
     showTabs?: boolean
     tabsBarStyle?: ITabsBarStyle

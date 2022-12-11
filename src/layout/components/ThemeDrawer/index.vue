@@ -9,6 +9,13 @@
     <a-drawer :visible="getThemeDrawerStatus" title="主题配置" width="285" @close="switchThemeDrawerStatus()">
         <a-form :model="theme">
             <!--<a-divider orientation="left">标签栏</a-divider>-->
+            <a-form-item label="主题">
+                <a-select :value="getTheme" @change="(val) => switchTheme(val)">
+                    <a-select-option value="green">绿茵广场</a-select-option>
+                    <a-select-option value="white">触碰纯白</a-select-option>
+                    <a-select-option value="red">白白朱朱</a-select-option>
+                </a-select>
+            </a-form-item>
             <a-form-item label="布局">
                 <a-radio-group :value="getLayout" @change="(val) => switchLayout(val.target.value)">
                     <a-row :gutter="8">
@@ -73,6 +80,8 @@ import { ITheme } from "#/index"
 import { useThemeSetting } from "@/hooks"
 
 const {
+    getTheme,
+    switchTheme,
     getThemeDrawerStatus,
     switchThemeDrawerStatus,
     switchLayout,
