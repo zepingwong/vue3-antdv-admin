@@ -11,7 +11,7 @@
         >
             <a-tab-pane v-for="(item, index) in tabList" :key="item.name" :closable="item.affix !== true">
                 <template #closeIcon>
-                  <a-icon custom type="icon-close" style="font-size: 14px"></a-icon>
+                    <a-icon custom type="icon-close" style="font-size: 14px"></a-icon>
                 </template>
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
@@ -140,177 +140,177 @@ const handleDelete = (targetKey: string, action: string) => {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="less">
 .header-tabs {
-  height 44px
-  position: relative
-  box-sizing: border-box
-  display: flex
-  align-content: center
-  align-items: center
-  justify-content: space-between
-  background-color #FFF
-  padding 0 24px
-  border-top 2px solid #f6f6f6
-  :deep(.ant-tabs-nav) {
-    margin 0
-    &:before {
-      border none
+    height: 44px;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 0 24px;
+    border-top: 2px solid #f6f6f6;
+    :deep(.ant-tabs-nav) {
+        margin: 0;
+        &:before {
+            border: none;
+        }
     }
-  }
-  :deep(.anticon) {
-    margin-right 0
-  }
-  :deep(.ant-tabs-nav-operations) {
-    display none
-  }
-  .header-tabs-content {
-    // 灵动
-    &-smart {
-      height: $base-tag-item-height;
-      :deep(.ant-tabs-tab) {
-        .ant-tabs-tab-remove {
-          width 0
-          opacity 0
-          margin-left 0
-          margin-top 3px
-          line-height 20px
-          vertical-align -0.125em
-          text-transform none
-        }
-        margin-left 0 !important
-        margin-right 5px
-        height: $base-tag-item-height;
-        line-height: $base-tag-item-height;
-        border: 0;
-        transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
-        &:after {
-          position: absolute;
-          bottom 0
-          left 0
-          width 0
-          height 2px
-          content ''
-          background-color $base-color-blue
-          transition $base-transition
-        }
-        &:hover {
-          .ant-tabs-tab-remove {
-            width 26px
-            opacity 1
-            float right
-            transition: $base-transition;
-          }
-          background: mix($base-color-white, $base-color-blue, 90%);
-          &:after {
-            width: 100%;
-            transition: $base-transition;
-          }
-        }
-      }
-      :deep(.ant-tabs-tab-active) {
-        .ant-tabs-tab-remove {
-          width 26px
-          opacity 1
-        }
-        background: mix($base-color-white, $base-color-blue, 90%);
-        &:after {
-          width: 100%;
-          transition: $base-transition;
-        }
-      }
+    :deep(.anticon) {
+        margin-right: 0;
     }
-    // 卡片
-    &-card {
-      height $base-tag-item-height
-      :deep(.ant-tabs-tab) {
-        .ant-tabs-tab-remove {
-          width 0
-          opacity 0
-          margin-left 0
-          margin-top 3px
-          line-height 20px
-          text-transform none
-        }
-        height $base-tag-item-height
-        margin-left 0 !important
-        margin-right 5px
-        &:hover {
-          .ant-tabs-tab-remove {
-            width 26px
-            opacity 1
-            transition $base-transition
-          }
-          border-color #1890ff
-          border-radius 0
-        }
-        &-active {
-          .ant-tabs-tab-remove {
-            width 26px
-            opacity 1
-            transform translateX(0)
-          }
-          border-color #1890ff
-          border-radius 0
-        }
-      }
+    :deep(.ant-tabs-nav-operations) {
+        display: none;
     }
-    // 圆滑风格
-    &-smooth {
-      :deep(.ant-tabs-tab) {
-        .ant-tabs-tab-remove {
-          opacity 0
-          margin-left 0
-          margin-top 3px
-          line-height 20px
-          vertical-align -0.125em
-          text-transform none
+    .header-tabs-content {
+        // 灵动
+        &-smart {
+            height: @base-tag-item-height;
+            :deep(.ant-tabs-tab) {
+                .ant-tabs-tab-remove {
+                    width: 0;
+                    opacity: 0;
+                    margin-left: 0;
+                    margin-top: 3px;
+                    line-height: 20px;
+                    vertical-align: -0.125em;
+                    text-transform: none;
+                }
+                margin-left: 0 !important;
+                margin-right: 5px;
+                height: @base-tag-item-height;
+                line-height: @base-tag-item-height;
+                border: 0;
+                transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+                &:after {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    content: "";
+                    background-color: @base-color-blue;
+                    transition: @base-transition;
+                }
+                &:hover {
+                    .ant-tabs-tab-remove {
+                        width: 26px;
+                        opacity: 1;
+                        float: right;
+                        transition: @base-transition;
+                    }
+                    background: mix(@base-color-white, @base-color-blue, 90%);
+                    &:after {
+                        width: 100%;
+                        transition: @base-transition;
+                    }
+                }
+            }
+            :deep(.ant-tabs-tab-active) {
+                .ant-tabs-tab-remove {
+                    width: 26px;
+                    opacity: 1;
+                }
+                background: mix(@base-color-white, @base-color-blue, 90%);
+                &:after {
+                    width: 100%;
+                    transition: @base-transition;
+                }
+            }
         }
-        height $base-tag-item-height + 2
-        padding 0 20px 0 20px;
-        margin-top ($base-tabs-height/2 - $base-tag-item-height/2 - 2)
-        line-height $base-tag-item-height + 2
-        text-align center
-        border 0
-        background transparent
-        transition padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important
-        &:hover {
-          .ant-tabs-tab-remove {
-            display inline-block
-            opacity 1
-            transition: $base-transition;
-          }
-          padding: 0 30px 0 30px
-          color $base-color-black
-          background #dee1e6
-          mask url('../src/assets/tabs_images/tab.png')
-          -webkit-mask url('../src/assets/tabs_images/tab.png')
-          -webkit-mask-size: 100% 100%
+        // 卡片
+        &-card {
+            height: @base-tag-item-height;
+            :deep(.ant-tabs-tab) {
+                .ant-tabs-tab-remove {
+                    width: 0;
+                    opacity: 0;
+                    margin-left: 0;
+                    margin-top: 3px;
+                    line-height: 20px;
+                    text-transform: none;
+                }
+                height: @base-tag-item-height;
+                margin-left: 0 !important;
+                margin-right: 5px;
+                &:hover {
+                    .ant-tabs-tab-remove {
+                        width: 26px;
+                        opacity: 1;
+                        transition: @base-transition;
+                    }
+                    border-color: #1890ff;
+                    border-radius: 0;
+                }
+                &-active {
+                    .ant-tabs-tab-remove {
+                        width: 26px;
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                    border-color: #1890ff;
+                    border-radius: 0;
+                }
+            }
         }
-        &-active {
-          .ant-tabs-tab-remove {
-            display unset
-            opacity 1
-          }
-          padding 0 30px 0 30px
-          color $base-color-blue
-          background mix($base-color-white, $base-color-blue, 90%)
-          mask url('../src/assets/tabs_images/tab.png')
-          mask-size: 100% 100%
-          -webkit-mask url('../src/assets/tabs_images/tab.png')
-          -webkit-mask-size: 100% 100%
-          &:hover {
-            padding: 0 30px 0 30px
-            color $base-color-blue
-            background mix($base-color-white, $base-color-blue, 90%)
-            mask url('../src/assets/tabs_images/tab.png')
-            mask-size 100% 100%
-            -webkit-mask url('../src/assets/tabs_images/tab.png')
-            -webkit-mask-size 100% 100%
-          }
+        // 圆滑风格
+        &-smooth {
+            :deep(.ant-tabs-tab) {
+                .ant-tabs-tab-remove {
+                    opacity: 0;
+                    margin-left: 0;
+                    margin-top: 3px;
+                    line-height: 20px;
+                    vertical-align: -0.125em;
+                    text-transform: none;
+                }
+                height: @base-tag-item-height + 2;
+                padding: 0 20px 0 20px;
+                margin-top: (@base-tabs-height / 2 - @base-tag-item-height / 2 - 2);
+                line-height: @base-tag-item-height + 2;
+                text-align: center;
+                border: 0;
+                background: transparent;
+                transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+                &:hover {
+                    .ant-tabs-tab-remove {
+                        display: inline-block;
+                        opacity: 1;
+                        transition: @base-transition;
+                    }
+                    padding: 0 30px 0 30px;
+                    color: @base-color-black;
+                    background: #dee1e6;
+                    mask: url("~@/assets/tabs_images/tab.png");
+                    -webkit-mask: url("~@/assets/tabs_images/tab.png");
+                    -webkit-mask-size: 100% 100%;
+                }
+                &-active {
+                    .ant-tabs-tab-remove {
+                        display: unset;
+                        opacity: 1;
+                    }
+                    padding: 0 30px 0 30px;
+                    color: @base-color-blue;
+                    background: mix(@base-color-white, @base-color-blue, 90%);
+                    mask: url("~@/assets/tabs_images/tab.png");
+                    mask-size: 100% 100%;
+                    -webkit-mask: url("~@/assets/tabs_images/tab.png");
+                    -webkit-mask-size: 100% 100%;
+                    &:hover {
+                        padding: 0 30px 0 30px;
+                        color: @base-color-blue;
+                        background: mix(@base-color-white, @base-color-blue, 90%);
+                        mask: url("~@/assets/tabs_images/tab.png");
+                        mask-size: 100% 100%;
+                        -webkit-mask: url("~@/assets/tabs_images/tab.png");
+                        -webkit-mask-size: 100% 100%;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 </style>

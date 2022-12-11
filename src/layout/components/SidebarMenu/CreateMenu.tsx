@@ -26,7 +26,10 @@ export default defineComponent({
 
         const menuItem = (router: RouteRecordRaw) => {
             const itemSlots: Slots = {
-                icon: () => (router.meta?.icon ? [<aIcon custom={router.meta?.isCustomSvg} type={router.meta?.icon || ""} />] : [])
+                icon: () =>
+                    router.meta?.icon
+                        ? [<aIcon custom={router.meta?.isCustomSvg} type={router.meta?.icon || ""} />]
+                        : []
             }
             return (
                 <a-menu-item v-slots={itemSlots} key={router.name}>
@@ -36,8 +39,14 @@ export default defineComponent({
         }
 
         const menuCreate = (router: RouteRecordRaw) => {
-            if (router.children && router.children.length > 0 && !router.meta?.hidden) {
+            if (router.children && router.children.length > 1 && !router.meta?.hidden) {
                 return menuSub(router)
+            } else if (router.children && router.children.length === 1) {
+                // 只有一个子路由的时候, 只显示一个child
+                return menuItem({
+                    ...router.children[0],
+                    path: router.path + "/" + router.children[0].path
+                })
             } else if (!router.meta?.hidden) {
                 return menuItem(router)
             }
