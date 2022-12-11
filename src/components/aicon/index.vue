@@ -4,13 +4,54 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue"
-import { HomeOutlined, createFromIconfontCN } from "@ant-design/icons-vue"
+import {
+    HomeOutlined,
+    createFromIconfontCN,
+    QuestionCircleOutlined,
+    CheckOutlined,
+    EditOutlined,
+    SearchOutlined,
+    RedoOutlined,
+    DownOutlined,
+    CloseOutlined,
+    UserOutlined,
+    InboxOutlined,
+    CopyOutlined,
+    LoadingOutlined,
+    CheckCircleOutlined,
+    PoweroffOutlined,
+    MailOutlined,
+    MessageOutlined,
+    PlusOutlined,
+    ClearOutlined
+} from "@ant-design/icons-vue"
+const ICON_URL: string = import.meta.env.VITE_ICONFONT_URL
 const IconFont = createFromIconfontCN({
-    scriptUrl: "//at.alicdn.com/t/c/font_3683886_niguzcsnw3r.js"
+    scriptUrl: ICON_URL
 })
 export default defineComponent({
     name: "AIcon",
-    components: { HomeOutlined, IconFont },
+    components: {
+        HomeOutlined,
+        IconFont,
+        QuestionCircleOutlined,
+        CheckOutlined,
+        UserOutlined,
+        MessageOutlined,
+        RedoOutlined,
+        DownOutlined,
+        EditOutlined,
+        SearchOutlined,
+        InboxOutlined,
+        CloseOutlined,
+        CopyOutlined,
+        MailOutlined,
+        ClearOutlined,
+        LoadingOutlined,
+        PlusOutlined,
+        PoweroffOutlined,
+        CheckCircleOutlined
+    },
     props: {
         type: {
             required: true,
@@ -27,4 +68,4 @@ export default defineComponent({
     }
 })
 </script>
-<style lang="stylus" scoped></style>
+<style lang="less" scoped></style>
