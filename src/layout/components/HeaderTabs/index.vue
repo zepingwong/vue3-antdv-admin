@@ -146,7 +146,7 @@ const handleDelete = (targetKey: string, action: string) => {
 
 <style scoped lang="less">
 .header-tabs {
-    height: 44px;
+    height: @base-tabs-height;
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -180,13 +180,14 @@ const handleDelete = (targetKey: string, action: string) => {
 
             :deep(.ant-tabs-tab) {
                 .ant-tabs-tab-remove {
-                    width: 0;
                     opacity: 0;
+                    width: 0;
                     margin-left: 0;
                     margin-top: 3px;
                     line-height: 20px;
                     vertical-align: -0.125em;
                     text-transform: none;
+                    padding-right: 0;
                 }
 
                 margin-left: 0 !important;
@@ -203,7 +204,7 @@ const handleDelete = (targetKey: string, action: string) => {
                     width: 0;
                     height: 2px;
                     content: "";
-                    background-color: @base-color-blue;
+                    background-color: var(--ant-primary-color);
                     transition: @base-transition;
                 }
 
@@ -215,7 +216,7 @@ const handleDelete = (targetKey: string, action: string) => {
                         transition: @base-transition;
                     }
 
-                    background: mix(@base-color-white, @base-color-blue, 90%);
+                    background-color: var(--ant-primary-color-outline);
 
                     &:after {
                         width: 100%;
@@ -230,8 +231,10 @@ const handleDelete = (targetKey: string, action: string) => {
                     opacity: 1;
                 }
 
-                background: mix(@base-color-white, @base-color-blue, 90%);
-
+                background: var(--ant-primary-color-outline);
+                &:hover {
+                    background: var(--ant-primary-color-outline);
+                }
                 &:after {
                     width: 100%;
                     transition: @base-transition;
@@ -245,12 +248,14 @@ const handleDelete = (targetKey: string, action: string) => {
 
             :deep(.ant-tabs-tab) {
                 .ant-tabs-tab-remove {
-                    width: 0;
                     opacity: 0;
+                    width: 0;
                     margin-left: 0;
                     margin-top: 3px;
                     line-height: 20px;
+                    vertical-align: -0.125em;
                     text-transform: none;
+                    padding-right: 0;
                 }
 
                 height: @base-tag-item-height;
@@ -264,7 +269,7 @@ const handleDelete = (targetKey: string, action: string) => {
                         transition: @base-transition;
                     }
 
-                    border-color: #1890ff;
+                    border-color: var(--ant-primary-color);
                     border-radius: 0;
                 }
 
@@ -275,7 +280,7 @@ const handleDelete = (targetKey: string, action: string) => {
                         transform: translateX(0);
                     }
 
-                    border-color: #1890ff;
+                    border-color: var(--ant-primary-color);
                     border-radius: 0;
                 }
             }
