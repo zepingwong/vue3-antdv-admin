@@ -1,0 +1,13 @@
+.layout {
+  &-comprehensive {
+    height: 100%;
+    :deep(.ant-layout-header) {
+      padding: 0;
+      background-color: @base-color-white;
+      height: @base-top-bar-height;
+      &-tabs {
+        height: @base-top-bar-height + @base-tabs-height;
+      }
+    }
+  }
+}

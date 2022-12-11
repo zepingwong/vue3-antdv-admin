@@ -2,15 +2,15 @@
     <div class="header-content">
         <div class="left-panel">
             <!--侧边栏开关-->
-            <header-toggle></header-toggle>
+            <header-toggle />
             <!--面包屑导航-->
-            <header-breadcrumb v-if="store.state.theme.showBreadcrumb"></header-breadcrumb>
+            <header-breadcrumb />
         </div>
         <div class="right-panel">
             <!--主题设置-->
-            <theme-drawer></theme-drawer>
+            <theme-drawer />
             <!--用户头像-->
-            <user-dropdown></user-dropdown>
+            <user-dropdown />
         </div>
     </div>
 </template>
@@ -20,9 +20,6 @@ import ThemeDrawer from "@/layout/components/ThemeDrawer/index.vue"
 import UserDropdown from "@/layout/components/UserDropdown/index.vue"
 import HeaderToggle from "@/layout/components/SidebarToggle/index.vue"
 import HeaderBreadcrumb from "@/layout/components/HeaderBreadcrumb/index.vue"
-import { useStore } from "vuex"
-
-const store = useStore()
 </script>
 
 <style scoped lang="stylus">

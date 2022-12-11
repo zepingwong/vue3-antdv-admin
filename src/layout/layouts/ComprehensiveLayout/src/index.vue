@@ -1,19 +1,18 @@
 <!--综合布局 -->
 <template>
-    <a-layout style="height: 100%">
+    <a-layout class="layout-comprehensive">
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
-            <sidebar-menu></sidebar-menu>
+            <sidebar-menu />
         </a-layout-sider>
         <a-layout>
             <!--头部-->
             <a-layout-header
-                style="background: #fff; padding: 0"
-                :style="{
-                    height: store.state.theme.showTabs ? '104px' : '64px'
+                :class="{
+                    'ant-layout-header-tabs': getShowTabs
                 }"
             >
-                <header-nav></header-nav>
-                <header-tabs v-if="store.state.theme.showTabs"></header-tabs>
+                <header-nav />
+                <header-tabs />
             </a-layout-header>
             <!--内容-->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
@@ -28,6 +27,8 @@ import HeaderNav from "@/layout/layouts/ComprehensiveLayout/src/HeaderNav.vue"
 import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import SidebarMenu from "@/layout/components/SidebarMenu/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
+import { useThemeSetting } from "@/hooks"
+const { getShowTabs } = useThemeSetting()
 import { useStore } from "vuex"
 
 const store = useStore()

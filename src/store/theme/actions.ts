@@ -1,12 +1,15 @@
 import { ActionTree } from "vuex"
-import { IThemeConfig } from "@/types/IThemeConfig"
-import { IState } from "@/types/IState"
-import { SET_SIDEBAR } from "@/store/theme/mutations"
+import { ITheme, IState, IThemeConfig } from "#/index"
 
-const SWITCH_SIDEBAR = "SWITCH_SIDEBAR"
-const actions: ActionTree<IThemeConfig, IState> = {
-    [SWITCH_SIDEBAR]: ({ commit }) => {
-        commit(SET_SIDEBAR)
+export const SET_THEME = "SET_THEME"
+export const SET_SIDEBAR = "SET_SIDEBAR"
+
+const actions: ActionTree<ITheme, IState> = {
+    [SET_SIDEBAR]: ({ commit }, open: boolean) => {
+        commit(SET_SIDEBAR, open)
+    },
+    [SET_THEME]: ({ commit }, config: IThemeConfig) => {
+        commit(SET_THEME, config)
     }
 }
 

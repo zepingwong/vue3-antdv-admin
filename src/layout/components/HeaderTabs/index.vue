@@ -1,11 +1,11 @@
 <template>
-    <div class="header-tabs">
+    <div v-if="getShowTabs" class="header-tabs">
         <a-tabs
             v-model:active-key="activeKey"
             type="editable-card"
             :tab-bar-gutter="-16"
             hide-add
-            :class="`header-tabs-content-${store.state.theme.tabsBarStyle}`"
+            :class="`header-tabs-content-${getTabsBarStyle}`"
             @tab-click="handleClick"
             @edit="handleDelete"
         >
@@ -44,6 +44,9 @@ import { computed, ref, watch, ComputedRef, onBeforeMount } from "vue"
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
 import { useStore } from "vuex"
 import { ITab } from "@/types/ITab"
+import { useThemeSetting } from "@/hooks"
+const { getTabsBarStyle, getShowTabs } = useThemeSetting()
+
 const store = useStore()
 const route = useRoute()
 const router = useRouter()

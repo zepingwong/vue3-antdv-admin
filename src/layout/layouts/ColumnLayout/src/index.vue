@@ -26,14 +26,12 @@
         <a-layout>
             <!--头部-->
             <a-layout-header
-                :style="{
-                    height: store.state.theme.showTabs ? '104px' : '64px',
-                    background: '#FFFFFF',
-                    padding: 0
+                :class="{
+                    'ant-layout-header-tabs': getShowTabs
                 }"
             >
-                <header-content></header-content>
-                <header-tabs v-if="store.state.theme.showTabs"></header-tabs>
+                <header-content />
+                <header-tabs v-if="getShowTabs" />
             </a-layout-header>
             <!--内容-->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
@@ -50,6 +48,8 @@ import MainContent from "@/layout/components/MainContent/index.vue"
 import HeaderContent from "@/layout/components/HeaderContent/index.vue"
 import ColumnBar from "@/layout/layouts/ColumnLayout/src/ColumnBar.vue"
 import { useStore } from "vuex"
+import { useThemeSetting } from "@/hooks"
+const { getShowTabs } = useThemeSetting()
 
 const store = useStore()
 </script>

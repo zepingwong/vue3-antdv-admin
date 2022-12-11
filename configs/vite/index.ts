@@ -64,7 +64,7 @@ export async function createViteConfig(
                 },
                 less: {
                     javascriptEnabled: true,
-                    additionalData: `@import "${resolve(root, "src/assets/css/variables.less")}";`
+                    additionalData: `@import "${resolve(root, "src/assets/css/global.less")}";`
                 }
             }
         },

@@ -7,13 +7,12 @@
         <a-layout>
             <!--头部-->
             <a-layout-header
-                style="background: #fff; padding: 0"
-                :style="{
-                    height: store.state.theme.showTabs ? '104px' : '64px'
+                :class="{
+                    'ant-layout-header-tabs': getShowTabs
                 }"
             >
-                <header-content></header-content>
-                <header-tabs v-if="store.state.theme.showTabs"></header-tabs>
+                <header-content />
+                <header-tabs v-if="getShowTabs" />
             </a-layout-header>
             <!--内容-->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
@@ -28,9 +27,10 @@ import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
 import HeaderContent from "@/layout/components/HeaderContent/index.vue"
 import SidebarMenu from "@/layout/components/SidebarMenu/index.vue"
-
+import { useThemeSetting } from "@/hooks"
+const { getShowTabs } = useThemeSetting()
 import { useStore } from "vuex"
 const store = useStore()
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="less" scoped></style>

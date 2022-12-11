@@ -1,12 +1,8 @@
 <template>
-    <div class="header-breadcrumb">
+    <div v-if="getShowBreadcrumb" class="header-breadcrumb">
         <a-breadcrumb>
             <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">
-                <a-icon
-                    v-if="store.state.theme.showBreadcrumbIcon"
-                    :custom="item.meta.isCustomSvg"
-                    :type="item.meta.icon"
-                ></a-icon>
+                <a-icon v-if="getShowBreadcrumbIcon" :custom="item.meta.isCustomSvg" :type="item.meta.icon"></a-icon>
                 {{ item.meta.title }}
             </a-breadcrumb-item>
         </a-breadcrumb>
@@ -14,12 +10,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from "vuex"
 import { useRoute } from "vue-router"
 import AIcon from "@/components/aicon/index.vue"
+import { useThemeSetting } from "@/hooks"
+
+const { getShowBreadcrumbIcon, getShowBreadcrumb } = useThemeSetting()
 
 const route = useRoute()
-const store = useStore()
 </script>
 
 <style lang="stylus" scoped>

@@ -2,7 +2,7 @@
     <div class="header-nav">
         <div class="left-panel">
             <!--侧边栏开关-->
-            <header-toggle></header-toggle>
+            <header-toggle />
             <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
@@ -15,9 +15,9 @@
 
         <div class="right-panel">
             <!--主题设置-->
-            <theme-drawer></theme-drawer>
+            <theme-drawer />
             <!--用户头像-->
-            <user-dropdown></user-dropdown>
+            <user-dropdown />
         </div>
     </div>
 </template>

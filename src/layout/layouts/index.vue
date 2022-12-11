@@ -1,17 +1,17 @@
 <template>
     <div
         :class="{
-            'layout-wrapper': true,
-            mobile: store.state.theme.device === 'mobile'
+            'layout-wrapper': true
         }"
     >
-        <component :is="`${store.state.theme.layout}Layout`" />
+        <component :is="`${getLayout}Layout`" />
     </div>
 </template>
 
 <script lang="ts" setup>
-import { useStore } from "vuex"
-const store = useStore()
+import { useThemeSetting } from "@/hooks"
+
+const { getLayout } = useThemeSetting()
 </script>
 
 <style scoped></style>

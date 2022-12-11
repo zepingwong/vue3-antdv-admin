@@ -1,19 +1,16 @@
 <template>
     <div class="theme__drawer"></div>
-    <a-tooltip placement="bottom" @click="handleOpenDrawer">
+    <a-tooltip placement="bottom" @click="switchThemeDrawerStatus()">
         <template #title>
             <span>主题设置</span>
         </template>
         <a-icon class="theme__drawer-trigger" custom type="icon-theme" />
     </a-tooltip>
-    <a-drawer v-model:visible="theme.themeDrawer" title="主题配置" width="285">
-        <template #extra>
-            <a-button type="primary" @click="handleSaveTheme">保存</a-button>
-        </template>
+    <a-drawer :visible="getThemeDrawerStatus" title="主题配置" width="285" @close="switchThemeDrawerStatus()">
         <a-form :model="theme">
             <!--<a-divider orientation="left">标签栏</a-divider>-->
             <a-form-item label="布局">
-                <a-radio-group v-model:value="theme.layout">
+                <a-radio-group :value="getLayout" @change="(val) => switchLayout(val.target.value)">
                     <a-row :gutter="8">
                         <a-col :span="24">
                             <a-radio-button value="Vertical">
@@ -37,23 +34,23 @@
                 </a-radio-group>
             </a-form-item>
             <a-form-item label="是否显示标签栏">
-                <a-switch v-model:checked="theme.showTabs" />
+                <a-switch :checked="getShowTabs" @change="switchShowTabs" />
             </a-form-item>
-            <a-form-item v-if="theme.showTabs" label="标签栏风格">
-                <a-select v-model:value="theme.tabsBarStyle">
+            <a-form-item v-if="getShowTabs" label="标签栏风格">
+                <a-select :value="getTabsBarStyle" @change="(val) => switchTabsBarStyle(val)">
                     <a-select-option value="smooth">圆滑风格</a-select-option>
                     <a-select-option value="card">卡片风格</a-select-option>
                     <a-select-option value="smart">灵动风格</a-select-option>
                 </a-select>
             </a-form-item>
-            <a-form-item v-if="theme.showTabs" label="标签栏是否显示图标">
-                <a-switch v-model:checked="theme.showTabsBarIcon" />
+            <a-form-item v-if="getShowTabs" label="标签栏是否显示图标">
+                <a-switch :checked="getShowTabsBarIcon" @change="switchShowTabsBarIcon" />
             </a-form-item>
-            <a-form-item label="是否显示面包屑">
-                <a-switch v-model:checked="theme.showBreadcrumb" />
+            <a-form-item v-if="['Column', 'Vertical'].includes(getLayout)" label="是否显示面包屑">
+                <a-switch :checked="getShowBreadcrumb" @change="switchShowBreadcrumb" />
             </a-form-item>
-            <a-form-item v-if="theme.showBreadcrumb" label="面包屑是否显示图标">
-                <a-switch v-model:checked="theme.showBreadcrumbIcon" />
+            <a-form-item v-if="getShowBreadcrumb" label="面包屑是否显示图标">
+                <a-switch :checked="getShowBreadcrumbIcon" @change="switchShowBreadcrumbIcon" />
             </a-form-item>
 
             <a-form-item v-if="theme.columnStyle && theme.layout === 'Column'" label="分栏风格">
@@ -72,19 +69,27 @@
 import AIcon from "@/components/aicon/index.vue"
 import { computed } from "vue"
 import { useStore } from "vuex"
-import { IThemeConfig } from "#/index"
+import { ITheme } from "#/index"
+import { useThemeSetting } from "@/hooks"
 
+const {
+    getThemeDrawerStatus,
+    switchThemeDrawerStatus,
+    switchLayout,
+    getLayout,
+    switchShowTabs,
+    getShowTabs,
+    getTabsBarStyle,
+    getShowTabsBarIcon,
+    switchShowTabsBarIcon,
+    switchShowBreadcrumb,
+    getShowBreadcrumbIcon,
+    switchShowBreadcrumbIcon,
+    switchTabsBarStyle,
+    getShowBreadcrumb
+} = useThemeSetting()
 const store = useStore()
-const theme = computed<IThemeConfig>(() => store.state.theme)
-// 打开主题抽屉
-const handleOpenDrawer = () => {
-    store.commit("theme/SET_THEME_DRAWER", true)
-}
-// 保存主题
-const handleSaveTheme = () => {
-    store.dispatch("theme/SAVE_THEME", theme.value)
-    store.commit("theme/SET_THEME_DRAWER", false)
-}
+const theme = computed<ITheme>(() => store.state.theme)
 </script>
 
 <style scoped lang="stylus">

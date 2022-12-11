@@ -1,7 +1,6 @@
 import { GetterTree } from "vuex"
-import { IThemeConfig } from "@/types/IThemeConfig"
-import { IState } from "@/types/IState"
+import { ITheme, IState } from "#/index"
 
-const getters: GetterTree<IThemeConfig, IState> = {}
+const getters: GetterTree<ITheme, IState> = {}
 
 export default getters

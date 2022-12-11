@@ -1,15 +1,34 @@
-import { IThemeConfig } from "@/types/IThemeConfig"
+import { ITheme } from "#/index"
 
-const state: IThemeConfig = {
-    layout: "Vertical",
-    device: "desktop",
-    collapsed: false,
-    showTabs: true,
-    showTabsBarIcon: true,
-    tabsBarStyle: "smooth",
-    showBreadcrumb: true,
-    showBreadcrumbIcon: true,
-    columnStyle: "card"
+const get = () => {
+    const str = localStorage.getItem("themeConfig")
+    if (str) {
+        return {
+            config: JSON.parse(str),
+            device: "desktop",
+            collapsed: false,
+            loading: false,
+            containerHeight: 0
+        } as ITheme
+    } else {
+        return {
+            config: {
+                layout: "Comprehensive",
+                showTabsBarIcon: true,
+                showTabs: true,
+                showBreadcrumb: true,
+                tabsBarStyle: "smooth",
+                showBreadcrumbIcon: true,
+                formLabelAlign: "left",
+                columnStyle: "card"
+            },
+            device: "desktop",
+            collapsed: false,
+            loading: false,
+            containerHeight: 0
+        } as ITheme
+    }
 }
+const state: ITheme = get()
 
 export default state
