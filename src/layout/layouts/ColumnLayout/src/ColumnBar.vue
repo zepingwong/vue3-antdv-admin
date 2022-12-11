@@ -1,21 +1,20 @@
 <template>
-    <div>
+    <div
+        :style="{
+            width: getColumnStyle === 'horizontal' ? '84px' : '64px'
+        }"
+    >
         <sidebar-logo :small="true" />
-        <a-menu
-            v-model:selectedKeys="selectedKeys"
-            theme="dark"
-            mode="inline"
-            :class="`column-bar-${store.state.theme.columnStyle}`"
-        >
+        <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" :class="`column-bar-${getColumnStyle}`">
             <a-menu-item v-for="item in parentRoute" :key="item.name">
                 <router-link :to="item.path">
                     <a-icon
                         :custom="item.meta?.isCustomSvg"
                         :type="item.meta?.icon ? item.meta?.icon : ''"
                         :style="{
-                            width: store.state.theme.columnStyle === 'horizontal' ? 'auto' : '100%'
+                            width: getColumnStyle === 'horizontal' ? 'auto' : '100%'
                         }"
-                    ></a-icon>
+                    />
                     {{ item.meta?.title }}
                 </router-link>
             </a-menu-item>
@@ -27,10 +26,12 @@
 import AIcon from "@/components/aicon/index.vue"
 import { computed, ref, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
-import { useStore } from "vuex"
 import { constantRouter } from "@/router/constant"
 import SidebarLogo from "@/layout/components/SidebarLogo/index.vue"
-const store = useStore()
+import { useThemeSetting } from "@/hooks"
+
+const { getColumnStyle } = useThemeSetting()
+
 const router = useRouter()
 const route = useRoute()
 const selectedKeys = ref(["Root"])
@@ -40,15 +41,9 @@ const parentRoute = computed(() => {
         if (constantRouter.indexOf(item.path) === -1) {
             // 权限筛选
             if (item.meta?.roles && item.meta.roles.length > 0) {
-                if (
-                    (item.meta.roles.indexOf("buyer") !== -1 && store.state.user.info.U_IsBuyer === "Y") ||
-                    (item.meta.roles.indexOf("sale") !== -1 && store.state.user.info.U_IsSale === "Y") ||
-                    store.state.user.info.SuperUser === "Y"
-                ) {
-                    // 有子路由的放到顶部菜单栏
-                    if (item.children && item.children.length > 0) {
-                        return true
-                    }
+                // 有子路由的放到顶部菜单栏
+                if (item.children && item.children.length > 0) {
+                    return true
                 }
             } else {
                 return true
@@ -64,101 +59,126 @@ watch(
 )
 </script>
 
-<style lang="stylus" scoped>
+<style lang="less" scoped>
 .column-bar {
-  &-horizontal {
-    width 84px
-    background-color transparent
-    :deep(.ant-menu-item) {
-      height 40px
-      white-space initial
-      padding 0 !important
-      display flex
-      margin-bottom 0
-      margin-top 0
-      text-align center
-      line-height 25px
-      .ant-menu-title-content {
-        flex none
-        margin auto
-      }
-    }
-  }
-  &-arrow {
-    width 64px
-    background-color transparent
-    :deep(.ant-menu-item) {
-      height 64px
-      white-space initial
-      padding 0 !important
-      display flex
-      margin-bottom 0
-      margin-top 0
-      text-align center
-      line-height 25px
-      &-selected {
-        background-color transparent !important
-      }
-      .ant-menu-title-content {
-        flex none
-        margin auto
-      }
-    }
-  }
-  &-card {
-    width 64px
-    background-color transparent
-    :deep(.ant-menu-item) {
-      background-color transparent
-      height 64px
-      white-space initial
-      padding 0 !important
-      display flex
-      margin-bottom 0
-      margin-top 0
-      text-align center
-      line-height 20px
-      &-selected {
-        background-color transparent !important
-        .ant-menu-title-content {
-          background-color #1890ff
-          border-radius 5px
-          width 80%
-          height 80%
-          display flex
-          .router-link-active {
-            margin auto
-          }
+    // 横向
+    &-horizontal {
+        width: 84px;
+        background-color: transparent;
+
+        :deep(.ant-menu-item) {
+            height: 40px;
+            white-space: initial;
+            padding: 0 !important;
+            display: flex;
+            margin-bottom: 0;
+            margin-top: 0;
+            text-align: center;
+            line-height: 25px;
+
+            .ant-menu-title-content {
+                flex: none;
+                margin: auto;
+            }
         }
-      }
-      .ant-menu-title-content {
-        flex none
-        margin auto
-      }
     }
-  }
-  &-vertical {
-    width 64px
-    :deep(.ant-menu-item) {
-      height 64px
-      white-space initial
-      padding 0 !important
-      display flex
-      margin-bottom 0
-      margin-top 0
-      text-align center
-      line-height 25px
-      .ant-menu-title-content {
-        flex none
-        margin auto
-      }
+    // 箭头
+    &-arrow {
+        width: 64px;
+        background-color: transparent;
+
+        :deep(.ant-menu-item) {
+            height: 64px;
+            white-space: initial;
+            padding: 0 !important;
+            display: flex;
+            margin-bottom: 0;
+            margin-top: 0;
+            text-align: center;
+            line-height: 25px;
+
+            &-selected {
+                background-color: transparent !important;
+                position: relative;
+                &:before {
+                    content: " ";
+                    position: absolute;
+                    top: 50%;
+                    border: 10px solid transparent;
+                    transform: translateY(-50%);
+                    right: 0;
+                    height: 0;
+                    width: 0;
+                    //尖朝上，bottom。以此类推
+                    border-right-color: var(--ant-primary-color);
+                }
+            }
+
+            .ant-menu-title-content {
+                flex: none;
+                margin: auto;
+            }
+        }
     }
-  }
-  :deep(.ant-menu-inline){
-    margin-bottom 0 !important
-  }
-  :deep(.ant-menu-sub) {
-    background transparent
-  }
+    // 卡片
+    &-card {
+        width: 64px;
+        background-color: transparent;
+        :deep(.ant-menu-item) {
+            background-color: transparent;
+            height: 64px;
+            white-space: initial;
+            padding: 0 !important;
+            display: flex;
+            margin-bottom: 0;
+            margin-top: 0;
+            text-align: center;
+            line-height: 20px;
+            &-selected {
+                background-color: transparent !important;
+
+                .ant-menu-title-content {
+                    background-color: #1890ff;
+                    border-radius: 5px;
+                    width: 80%;
+                    height: 80%;
+                    display: flex;
+                    .router-link-active {
+                        margin: auto;
+                    }
+                }
+            }
+            .ant-menu-title-content {
+                flex: none;
+                margin: auto;
+            }
+        }
+    }
+    // 纵向
+    &-vertical {
+        width: 64px;
+        :deep(.ant-menu-item) {
+            height: 64px;
+            white-space: initial;
+            padding: 0 !important;
+            display: flex;
+            margin-bottom: 0;
+            margin-top: 0;
+            text-align: center;
+            line-height: 25px;
+            .ant-menu-title-content {
+                flex: none;
+                margin: auto;
+            }
+        }
+    }
+
+    :deep(.ant-menu-inline) {
+        margin-bottom: 0 !important;
+    }
+
+    :deep(.ant-menu-sub) {
+        background: transparent;
+    }
 }
 </style>

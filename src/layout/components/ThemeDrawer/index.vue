@@ -81,8 +81,8 @@
                 <a-switch :checked="getShowBreadcrumbIcon" @change="switchShowBreadcrumbIcon" />
             </a-form-item>
 
-            <a-form-item v-if="theme.columnStyle && theme.layout === 'Column'" label="分栏风格">
-                <a-select v-model:value="theme.columnStyle">
+            <a-form-item v-if="getColumnStyle && getLayout === 'Column'" label="分栏风格">
+                <a-select :value="getColumnStyle" @change="(val) => switchColumnStyle(val)">
                     <a-select-option value="vertical">纵向</a-select-option>
                     <a-select-option value="horizontal">横向</a-select-option>
                     <a-select-option value="card">卡片</a-select-option>
@@ -120,7 +120,9 @@ const {
     getShowBreadcrumbIcon,
     switchShowBreadcrumbIcon,
     switchTabsBarStyle,
-    getShowBreadcrumb
+    getShowBreadcrumb,
+    getColumnStyle,
+    switchColumnStyle
 } = useThemeSetting()
 const store = useStore()
 const theme = computed<ITheme>(() => store.state.theme)

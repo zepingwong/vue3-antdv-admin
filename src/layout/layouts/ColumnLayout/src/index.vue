@@ -4,24 +4,18 @@
         <a-layout-sider
             :trigger="null"
             :class="{
-                fold: store.state.theme.collapsed && store.state.theme.columnStyle !== 'horizontal',
-                foldh: store.state.theme.collapsed && store.state.theme.columnStyle === 'horizontal',
+                fold: store.state.theme.collapsed,
                 unfold: !store.state.theme.collapsed
             }"
         >
-            <column-bar
-                :style="{
-                    width: store.state.theme.columnStyle === 'horizontal' ? '84px' : '64px',
-                    'background-color': 'rgba(0, 0, 0, 0.85)'
-                }"
-            ></column-bar>
+            <column-bar />
             <sidebar-menu
                 style="background-color: #ffffff; border-right: 1px solid #f0f0f0"
                 :style="{
-                    width: store.state.theme.columnStyle === 'horizontal' ? '180px' : '200px',
+                    width: getColumnStyle === 'horizontal' ? '180px' : '200px',
                     transform: store.state.theme.collapsed ? 'translateX(-264px)' : 'translateX(0)'
                 }"
-            ></sidebar-menu>
+            />
         </a-layout-sider>
         <a-layout>
             <!--头部-->
@@ -49,7 +43,8 @@ import HeaderContent from "@/layout/components/HeaderContent/index.vue"
 import ColumnBar from "@/layout/layouts/ColumnLayout/src/ColumnBar.vue"
 
 import { useThemeSetting } from "@/hooks"
-const { getShowTabs } = useThemeSetting()
+
+const { getShowTabs, getColumnStyle } = useThemeSetting()
 import { useStore } from "vuex"
 
 const store = useStore()
@@ -61,24 +56,18 @@ const store = useStore()
   min-width 264px !important
   flex 0 0 264px !important
   width 264px !important
+
   .ant-layout-sider-children {
     display flex
   }
 }
+
 :deep(.fold) {
   max-width 64px !important
   min-width 64px !important
   flex 0 0 64px !important
   width 64px !important
-  .ant-layout-sider-children {
-    display flex
-  }
-}
-:deep(.foldh) {
-  max-width 84px !important
-  min-width 84px !important
-  flex 0 0 84px !important
-  width 84px !important
+
   .ant-layout-sider-children {
     display flex
   }

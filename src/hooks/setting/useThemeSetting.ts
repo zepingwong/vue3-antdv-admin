@@ -74,6 +74,11 @@ export const useThemeSetting = () => {
     const switchThemeDrawerStatus = () => {
         store.commit("theme/" + SET_THEME_DRAWER, !getThemeDrawerStatus.value)
     }
+    // 分栏
+    const getColumnStyle = computed(() => store.state.theme.config.columnStyle)
+    const switchColumnStyle = (columnStyle: string) => {
+        store.dispatch("theme/" + SET_THEME, { columnStyle }).then()
+    }
     return {
         getTheme, // 当前主题
         switchTheme, // 切换主题
@@ -90,6 +95,8 @@ export const useThemeSetting = () => {
         getLayout, // 获取当前布局
         switchLayout, // 切换布局
         getThemeDrawerStatus, // 获取主题设置抽屉状态
-        switchThemeDrawerStatus // 切换主题设置抽屉状态
+        switchThemeDrawerStatus, // 切换主题设置抽屉状态
+        getColumnStyle, // 获取当前分栏风格
+        switchColumnStyle // 切换分栏风格
     }
 }
