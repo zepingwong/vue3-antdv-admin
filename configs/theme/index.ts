@@ -6,3 +6,4 @@ export const themeSettings = _customTheme
 
 export * from "./green"
 export * from "./red"
+export * from "./blue"

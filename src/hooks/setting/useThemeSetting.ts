@@ -5,13 +5,19 @@ import { SET_THEME } from "@/store/theme/actions"
 import { themeSettings } from "../../../configs/theme"
 import { ILayout, ITabsBarStyle, IThemeName } from "#/config"
 import { ConfigProvider } from "ant-design-vue"
-import { green, red } from "../../../configs/theme"
+import { green, red, blue } from "../../../configs/theme"
 
 export const useThemeSetting = () => {
     // 主题
     const getTheme = computed<IThemeName>(() => store.state.theme.config.theme)
     const switchTheme = (themeName: IThemeName) => {
         switch (themeName) {
+            case "blue": {
+                ConfigProvider.config({
+                    theme: blue.color
+                })
+                break
+            }
             case "green": {
                 ConfigProvider.config({
                     theme: green.color

@@ -1,6 +1,6 @@
 export type ITabsBarStyle = "smooth" | "card" | "smart"
 export type ILayout = "Common" | "Comprehensive" | "Vertical" | "Column"
-export type IThemeName = "green" | "default" | "white" | "red"
+export type IThemeName = "green" | "blue" | "white" | "red"
 export interface IThemeConfig {
     theme?: IThemeName
     layout?: ILayout

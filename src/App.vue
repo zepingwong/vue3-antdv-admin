@@ -18,9 +18,12 @@ import { useStore } from "vuex"
 import { useRoute } from "vue-router"
 import { useThemeSetting } from "@/hooks"
 
-const { getLayout } = useThemeSetting()
+const { getLayout, getTheme, switchTheme } = useThemeSetting()
 import { constantRouter } from "@/router/constant"
-
+import { onMounted } from "vue"
+onMounted(() => {
+    switchTheme(getTheme.value)
+})
 const route = useRoute()
 const store = useStore()
 </script>

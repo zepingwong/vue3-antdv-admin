@@ -13,6 +13,7 @@ const get = () => {
     } else {
         return {
             config: {
+                theme: "blue",
                 layout: "Comprehensive",
                 showTabsBarIcon: true,
                 showTabs: true,
