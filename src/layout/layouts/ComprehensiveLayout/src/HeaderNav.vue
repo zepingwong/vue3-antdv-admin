@@ -6,7 +6,7 @@
             <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
-                        <a-icon :custom="item.meta.isCustomSvg" :type="item.meta.icon"></a-icon>
+                        <a-icon :custom="item.meta.isCustomSvg" :type="item.meta.icon" />
                         {{ item.meta.title }}
                     </router-link>
                 </a-menu-item>
@@ -29,6 +29,7 @@ import UserDropdown from "@/layout/components/UserDropdown/index.vue"
 import HeaderToggle from "@/layout/components/SidebarToggle/index.vue"
 import { computed, ref, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
+
 const router = useRouter()
 const route = useRoute()
 const selectedKeys = ref(["Root"])
@@ -43,29 +44,35 @@ watch(
 )
 </script>
 
-<style lang="stylus" scoped>
+<style lang="less" scoped>
 .header-nav {
-  height 60px
-  box-sizing border-box
-  display flex
-  padding 0 24px
+    height: @base-top-bar-height;
+    box-sizing: border-box;
+    display: flex;
+    padding: 0 24px;
 
-  .left-panel {
-    display flex
-    align-items center
-    justify-items center
-    line-height 58px
-    box-sizing border-box
-  }
+    .left-panel {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        line-height: @base-top-bar-height;
+        box-sizing: border-box;
+        :deep(.ant-menu-item) {
+            margin-top: -2px;
+        }
+        :deep(.ant-menu-horizontal) {
+            border-bottom: 0;
+        }
+    }
 
-  .right-panel {
-    line-height 58px
-    position absolute
-    right 24px
-    display: flex
-    align-content: center
-    align-items: center
-    justify-content: flex-end
-  }
+    .right-panel {
+        line-height: @base-top-bar-height;
+        position: absolute;
+        right: 24px;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: flex-end;
+    }
 }
 </style>

@@ -14,15 +14,15 @@ const handleSwitchSidebar = () => {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="less" scoped>
 .trigger {
-  font-size 18px
-  line-height 60px
-  cursor pointer
-  transition: color 0.3s
+    font-size: 14px;
+    line-height: 56px;
+    cursor: pointer;
+    transition: color 0.3s;
 
-  &:hover {
-    color: #1890ff
-  }
+    &:hover {
+        color: var(--ant-primary-color);
+    }
 }
 </style>

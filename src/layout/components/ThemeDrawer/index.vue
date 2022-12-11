@@ -6,35 +6,56 @@
         </template>
         <a-icon class="theme__drawer-trigger" custom type="icon-theme" />
     </a-tooltip>
-    <a-drawer :visible="getThemeDrawerStatus" title="主题配置" width="285" @close="switchThemeDrawerStatus()">
+    <a-drawer :visible="getThemeDrawerStatus" title="主题配置" width="450" @close="switchThemeDrawerStatus()">
         <a-form :model="theme">
             <a-form-item label="主题">
-                <a-select :value="getTheme" @change="(val) => switchTheme(val)">
-                    <a-select-option value="blue">默认</a-select-option>
-                    <a-select-option value="green">绿茵广场</a-select-option>
-                    <a-select-option value="white">触碰纯白</a-select-option>
-                    <a-select-option value="red">白白朱朱</a-select-option>
-                </a-select>
+                <a-radio-group :value="getTheme" button-style="solid" @change="(val) => switchTheme(val.target.value)">
+                    <a-radio-button
+                        value="blue"
+                        :style="{ color: getTheme === 'blue' ? '#ffffff' : blue.color.primaryColor }"
+                    >
+                        默认
+                    </a-radio-button>
+                    <a-radio-button
+                        value="green"
+                        :style="{ color: getTheme === 'green' ? '#ffffff' : green.color.primaryColor }"
+                    >
+                        绿茵广场
+                    </a-radio-button>
+                    <a-radio-button value="white">触碰纯白</a-radio-button>
+                    <a-radio-button
+                        value="red"
+                        :style="{ color: getTheme === 'red' ? '#ffffff' : red.color.primaryColor }"
+                    >
+                        白白朱朱
+                    </a-radio-button>
+                </a-radio-group>
             </a-form-item>
             <a-form-item label="布局">
-                <a-radio-group :value="getLayout" @change="(val) => switchLayout(val.target.value)">
+                <a-radio-group
+                    :value="getLayout"
+                    class="layout-radio-group"
+                    @change="(val) => switchLayout(val.target.value)"
+                >
                     <a-row :gutter="8">
-                        <a-col :span="24">
+                        <a-col :span="12">
                             <a-radio-button value="Vertical">
                                 纵向布局
-                                <a-icon type="icon-zongxiangbuju" custom class="radio__button-icon"></a-icon>
+                                <zongxiangbuju class="radio__button-icon" />
                             </a-radio-button>
                         </a-col>
-                        <a-col :span="24">
+                        <a-col :span="12">
                             <a-radio-button value="Comprehensive">
                                 综合布局
-                                <a-icon type="icon-zonghebuju" custom class="radio__button-icon"></a-icon>
+                                <zonghebuju class="radio__button-icon" />
                             </a-radio-button>
                         </a-col>
-                        <a-col :span="24">
+                    </a-row>
+                    <a-row :gutter="8" style="padding-top: 8px">
+                        <a-col :span="12">
                             <a-radio-button value="Column">
                                 分栏布局
-                                <a-icon type="icon-fenlanbuju" custom class="radio__button-icon"></a-icon>
+                                <fenlanbuju class="radio__button-icon" />
                             </a-radio-button>
                         </a-col>
                     </a-row>
@@ -78,6 +99,10 @@ import { computed } from "vue"
 import { useStore } from "vuex"
 import { ITheme } from "#/index"
 import { useThemeSetting } from "@/hooks"
+import Zongxiangbuju from "@/layout/components/ThemeDrawer/zongxiangbuju.vue"
+import Zonghebuju from "@/layout/components/ThemeDrawer/zonghebuju.vue"
+import Fenlanbuju from "@/layout/components/ThemeDrawer/fenlanbuju.vue"
+import { blue, green, red } from "../../../../configs/theme"
 
 const {
     getTheme,
@@ -101,48 +126,44 @@ const store = useStore()
 const theme = computed<ITheme>(() => store.state.theme)
 </script>
 
-<style scoped lang="stylus">
-:deep(.ant-radio-group) {
-  width 100%
-}
+<style scoped lang="less">
+.layout-radio-group {
+    width: 100%;
 
-:deep(.ant-radio-button-wrapper) {
-  height 146px
-  padding 0
-  width 100%
-  text-align center
-  display flex
+    :deep(.ant-radio-button-wrapper) {
+        height: 140px;
+        padding: 0;
+        width: 100%;
+        text-align: center;
+        display: flex;
 
-  .ant-radio-button {
-    text-align center
-  }
+        .ant-radio-button {
+            text-align: center;
+        }
 
-  .radio__button-icon {
-    font-size 172px
-    align-self center
+        .radio__button-icon {
+            width: 160px;
+            align-self: center;
 
-    svg {
-      height 0.65em
+            svg {
+                height: 0.65em;
+            }
+        }
     }
-  }
-
-  &:hover {
-    border-color var(--ant-primary-color);
-  }
 }
 
 :deep(.ant-form-item-control) {
-  text-align right
+    text-align: right;
 }
 
 :deep(.ant-select-selection-item) {
-  text-align center
+    text-align: center;
 }
 
 .theme__drawer {
-  &-trigger {
-    font-size 20px
-    padding 0 20px
-  }
+    &-trigger {
+        font-size: 20px;
+        padding: 0 20px;
+    }
 }
 </style>
