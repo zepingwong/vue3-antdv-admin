@@ -6,7 +6,7 @@ import constant from "@/router/constant"
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes: [...home, ...test, ...constant, ...table]
+    routes: [...home, ...constant, ...table]
 })
 
 router.beforeEach((to, from, next) => {

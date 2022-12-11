@@ -1,4 +1,4 @@
-import { ViteEnv } from "../../../types"
+import { ViteEnv } from "../../../types/global"
 
 export const wrapperEnv = (envConf: Record<string, any>): ViteEnv => {
     const viteEnv: Partial<ViteEnv> = {}

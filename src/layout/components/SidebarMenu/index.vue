@@ -4,7 +4,7 @@
         <a-menu
             v-model:selectedKeys="selectedKeys"
             v-model:open-keys="openKeys"
-            :theme="store.state.theme.layout === 'Column' ? 'light' : 'dark'"
+            :theme="getLayout === 'Column' ? 'light' : 'dark'"
             mode="inline"
         >
             <create-menu v-for="item in routes" :key="item.name" :router="item"></create-menu>
@@ -18,14 +18,17 @@ import { computed, ComputedRef, onBeforeMount, ref, watch } from "vue"
 import { constantRouter } from "@/router/constant"
 import CreateMenu from "@/layout/components/SidebarMenu/CreateMenu"
 import SidebarLogo from "@/layout/components/SidebarLogo/index.vue"
-import { useStore } from "vuex"
-const store = useStore()
+
+import { useThemeSetting } from "@/hooks"
+const { getLayout } = useThemeSetting()
+
 const route = useRoute()
 const router = useRouter()
 
 const routes: ComputedRef<readonly RouteRecordRaw[]> = computed(() => {
     // Comprehensive 和 Column 布局下,侧边栏为子路由
-    if (store.state.theme.layout === "Comprehensive" || store.state.theme.layout === "Column") {
+    if (["Comprehensive", "Column"].includes(getLayout.value)) {
+        if (route.matched.length === 0) return []
         const index: number = router.options.routes
             .map((item) => {
                 return item.name
@@ -40,7 +43,10 @@ const routes: ComputedRef<readonly RouteRecordRaw[]> = computed(() => {
     } else {
         return router.options.routes.filter((item) => {
             // 登录、404等路由不能出现在侧边栏
-            return constantRouter.indexOf(item.path) === -1
+            if (constantRouter.indexOf(item.path) === -1) {
+                // 一级路由权限筛选
+                return true
+            }
         })
     }
 })

@@ -31,10 +31,10 @@
                 }"
             >
                 <header-content />
-                <header-tabs v-if="getShowTabs" />
+                <header-tabs />
             </a-layout-header>
             <!--内容-->
-            <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
+            <a-layout-content>
                 <main-content></main-content>
             </a-layout-content>
         </a-layout>
@@ -47,9 +47,10 @@ import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
 import HeaderContent from "@/layout/components/HeaderContent/index.vue"
 import ColumnBar from "@/layout/layouts/ColumnLayout/src/ColumnBar.vue"
-import { useStore } from "vuex"
+
 import { useThemeSetting } from "@/hooks"
 const { getShowTabs } = useThemeSetting()
+import { useStore } from "vuex"
 
 const store = useStore()
 </script>

@@ -1,6 +1,5 @@
 .layout {
-  &-comprehensive {
-    height: 100%;
+  &-wrapper {
     :deep(.ant-layout-header) {
       padding: 0;
       background-color: @base-color-white;
@@ -9,5 +8,17 @@
         height: @base-top-bar-height + @base-tabs-height;
       }
     }
+    :deep(.ant-layout-content) {
+      margin: 24px 16px;
+      padding: 24px;
+      background: #fff;
+    }
+  }
+  &-comprehensive {
+    height: 100%;
+
+  }
+  &-vertical {
+    height: 100%;
   }
 }

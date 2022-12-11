@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="logo"></div>
+        <sidebar-logo :small="true" />
         <a-menu
             v-model:selectedKeys="selectedKeys"
             theme="dark"
@@ -10,13 +10,13 @@
             <a-menu-item v-for="item in parentRoute" :key="item.name">
                 <router-link :to="item.path">
                     <a-icon
-                        :custom="item.meta.isCustomSvg"
-                        :type="item.meta.icon"
+                        :custom="item.meta?.isCustomSvg"
+                        :type="item.meta?.icon ? item.meta?.icon : ''"
                         :style="{
                             width: store.state.theme.columnStyle === 'horizontal' ? 'auto' : '100%'
                         }"
                     ></a-icon>
-                    {{ item.meta.title }}
+                    {{ item.meta?.title }}
                 </router-link>
             </a-menu-item>
         </a-menu>
@@ -28,12 +28,33 @@ import AIcon from "@/components/aicon/index.vue"
 import { computed, ref, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from "vuex"
+import { constantRouter } from "@/router/constant"
+import SidebarLogo from "@/layout/components/SidebarLogo/index.vue"
 const store = useStore()
 const router = useRouter()
 const route = useRoute()
 const selectedKeys = ref(["Root"])
 const parentRoute = computed(() => {
-    return router.options.routes.filter((item) => item.children)
+    return router.options.routes.filter((item) => {
+        // 登录、404等路由不能出现在顶部菜单
+        if (constantRouter.indexOf(item.path) === -1) {
+            // 权限筛选
+            if (item.meta?.roles && item.meta.roles.length > 0) {
+                if (
+                    (item.meta.roles.indexOf("buyer") !== -1 && store.state.user.info.U_IsBuyer === "Y") ||
+                    (item.meta.roles.indexOf("sale") !== -1 && store.state.user.info.U_IsSale === "Y") ||
+                    store.state.user.info.SuperUser === "Y"
+                ) {
+                    // 有子路由的放到顶部菜单栏
+                    if (item.children && item.children.length > 0) {
+                        return true
+                    }
+                }
+            } else {
+                return true
+            }
+        }
+    })
 })
 watch(
     () => route.fullPath,
@@ -44,10 +65,6 @@ watch(
 </script>
 
 <style lang="stylus" scoped>
-.logo {
-  width 64px
-  height 64px
-}
 .column-bar {
   &-horizontal {
     width 84px

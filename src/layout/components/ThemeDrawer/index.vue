@@ -127,7 +127,7 @@ const theme = computed<ITheme>(() => store.state.theme)
   }
 
   &:hover {
-    border-color #1890ff
+    border-color var(--ant-primary-color);
   }
 }
 

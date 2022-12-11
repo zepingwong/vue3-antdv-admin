@@ -1,5 +1,5 @@
 <template>
-    <a-layout style="height: 100%">
+    <a-layout class="layout-vertical">
         <!--侧边栏-->
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
             <sidebar-menu></sidebar-menu>
@@ -15,7 +15,7 @@
                 <header-tabs v-if="getShowTabs" />
             </a-layout-header>
             <!--内容-->
-            <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
+            <a-layout-content>
                 <main-content></main-content>
             </a-layout-content>
         </a-layout>

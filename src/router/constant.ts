@@ -4,13 +4,13 @@ const constant: RouteRecordRaw[] = [
     {
         path: "/login",
         name: "Login",
-        component: () => import("@/views/login/index.vue"),
+        component: () => import("@/views/Login/index.vue"),
         meta: {
             hidden: false,
             alwaysShow: false,
             title: "登陆页",
             isCustomSvg: true,
-            icon: "home-outlined",
+            icon: "Home-outlined",
             roles: [],
             badge: "",
             dot: false,

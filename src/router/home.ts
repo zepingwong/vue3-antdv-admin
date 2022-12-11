@@ -10,7 +10,7 @@ const home: RouteRecordRaw[] = [
             alwaysShow: false,
             title: "首页",
             isCustomSvg: false,
-            icon: "home-outlined",
+            icon: "Home-outlined",
             roles: [],
             badge: "",
             dot: false,
@@ -23,15 +23,15 @@ const home: RouteRecordRaw[] = [
             {
                 path: "home",
                 name: "Home",
-                component: () => import("@/views/home/home.vue"),
+                component: () => import("@/views/Home/home.vue"),
                 redirect: "",
                 meta: {
                     alwaysShow: false,
                     hidden: false,
                     affix: true,
                     title: "首页",
-                    isCustomSvg: true,
-                    icon: "icon-password",
+                    isCustomSvg: false,
+                    icon: "Home-outlined",
                     roles: [],
                     badge: "",
                     dot: false,
@@ -45,7 +45,7 @@ const home: RouteRecordRaw[] = [
             {
                 path: "workbench",
                 name: "Workbench",
-                component: () => import("@/views/home/workbench.vue"),
+                component: () => import("@/views/Home/workbench.vue"),
                 redirect: "",
                 meta: {
                     alwaysShow: false,

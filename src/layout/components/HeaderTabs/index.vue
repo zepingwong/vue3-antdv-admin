@@ -6,21 +6,17 @@
             :tab-bar-gutter="-16"
             hide-add
             :class="`header-tabs-content-${getTabsBarStyle}`"
-            @tab-click="handleClick"
-            @edit="handleDelete"
+            @tab-click="(val) => clickTab(val)"
+            @edit="(val) => deleteOneTab(val)"
         >
-            <a-tab-pane v-for="(item, index) in tabList" :key="item.name" :closable="item.affix !== true">
+            <a-tab-pane v-for="(item, index) in getTabList" :key="item.name" :closable="item.affix !== true">
                 <template #closeIcon>
-                    <a-icon custom type="icon-close" style="font-size: 14px"></a-icon>
+                    <a-icon custom type="icon-close" style="font-size: 14px" />
                 </template>
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
                         <div style="display: inline-block">
-                            <a-icon
-                                v-if="store.state.theme.showTabsBarIcon"
-                                :custom="item.isCustomSvg"
-                                :type="item.icon"
-                            ></a-icon>
+                            <a-icon v-if="getShowTabsBarIcon" :custom="item.isCustomSvg" :type="item.icon" />
                             {{ item.title }}
                         </div>
                         <template #overlay>
@@ -40,55 +36,30 @@
 
 <script lang="ts" setup>
 import AIcon from "@/components/aicon/index.vue"
-import { computed, ref, watch, ComputedRef, onBeforeMount } from "vue"
+import { ref, watch, onBeforeMount } from "vue"
 import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
 import { useStore } from "vuex"
-import { ITab } from "@/types/ITab"
-import { useThemeSetting } from "@/hooks"
-
-const { getTabsBarStyle, getShowTabs } = useThemeSetting()
+import { ITab } from "#/tab"
+import { useThemeSetting, useTabs } from "@/hooks"
+const { getTabList, deleteOneTab, initAffixTabs, addOneTab, clickTab } = useTabs()
+const { getTabsBarStyle, getShowTabs, getShowTabsBarIcon } = useThemeSetting()
 
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
-const tabList: ComputedRef<ITab[]> = computed(() => {
-    return store.state.tabs
-})
 
-/**
- * 初始化Tab
- * */
-const initAffixTabs = (routes: readonly RouteRecordRaw[]) => {
-    routes.forEach((route) => {
-        if (route.meta && route.meta?.title && route.meta.affix) {
-            addTab({
-                name: route.name as string,
-                fullPath: route.path as string,
-                title: route.meta.title,
-                affix: route.meta.affix,
-                icon: route.meta.icon,
-                isCustomSvg: route.meta.isCustomSvg
-            })
-        }
-        if (route.children && route.children.length !== 0) initAffixTabs(route.children)
-    })
-}
-/**
- * 添加tab
- */
-const addTab = (tab: ITab) => {
-    store.dispatch("tabs/ADD_TAB", tab)
-}
 onBeforeMount(() => {
     initAffixTabs(router.options.routes)
+    // 保留当前页
     if (route.meta && route.meta?.title && route.meta.affix !== true) {
-        addTab({
+        addOneTab({
             name: route.name as string,
             fullPath: route.path as string,
             title: route.meta.title,
             affix: route.meta.affix as boolean,
             icon: route.meta.icon,
-            isCustomSvg: route.meta.isCustomSvg
+            isCustomSvg: route.meta.isCustomSvg,
+            query: route.query
         })
     }
     activeKey.value = route.name as string
@@ -96,12 +67,7 @@ onBeforeMount(() => {
 
 // 激活的tab
 const activeKey = ref<string>("Home")
-// tab点击跳转页面
-const handleClick = (targetKey: string) => {
-    if (route.fullPath !== targetKey) {
-        router.push(targetKey)
-    }
-}
+
 const handleOption = (tab: ITab, index: number, item: { key: string }) => {
     switch (item.key) {
         case "current": {
@@ -109,7 +75,7 @@ const handleOption = (tab: ITab, index: number, item: { key: string }) => {
             break
         }
         case "right": {
-            store.dispatch("tabs/DEL_TAB", { index: index, deleteCount: tabList.value.length - index + 1 })
+            store.dispatch("tabs/DEL_TAB", { index: index, deleteCount: getTabList.value.length - index + 1 })
             break
         }
     }
@@ -119,29 +85,18 @@ watch(
     () => {
         activeKey.value = route.name as string
         if (!route.meta.tabHidden) {
-            addTab({
+            addOneTab({
                 name: route.name as string,
                 fullPath: route.path as string,
                 title: route.meta.title,
                 affix: route.meta.affix as boolean,
                 icon: route.meta.icon,
-                isCustomSvg: route.meta.isCustomSvg
+                isCustomSvg: route.meta.isCustomSvg,
+                query: route.query
             })
         }
     }
 )
-// 关闭tab
-const handleDelete = (targetKey: string, action: string) => {
-    if (action === "remove") {
-        const index = tabList.value
-            .map((item) => {
-                return item.name
-            })
-            .indexOf(targetKey)
-        store.dispatch("tabs/DEL_TAB", { index: index, deleteCount: 1 })
-        router.push({ name: tabList.value[index - 1].name })
-    }
-}
 </script>
 
 <style scoped lang="less">
@@ -173,23 +128,41 @@ const handleDelete = (targetKey: string, action: string) => {
         display: none;
     }
 
+    :deep(.ant-tabs-tab) {
+        .ant-tabs-tab-remove {
+            opacity: 0;
+            width: 0;
+            margin-left: 0;
+            margin-top: 3px;
+            line-height: 20px;
+            vertical-align: -0.125em;
+            text-transform: none;
+            padding-right: 0;
+        }
+
+        &:hover {
+            .ant-tabs-tab-remove {
+                width: 26px;
+                opacity: 1;
+                float: right;
+                transition: @base-transition;
+            }
+        }
+
+        &-active {
+            .ant-tabs-tab-remove {
+                width: 26px;
+                opacity: 1;
+            }
+        }
+    }
+
     .header-tabs-content {
         // 灵动
         &-smart {
             height: @base-tag-item-height;
 
             :deep(.ant-tabs-tab) {
-                .ant-tabs-tab-remove {
-                    opacity: 0;
-                    width: 0;
-                    margin-left: 0;
-                    margin-top: 3px;
-                    line-height: 20px;
-                    vertical-align: -0.125em;
-                    text-transform: none;
-                    padding-right: 0;
-                }
-
                 margin-left: 0 !important;
                 margin-right: 5px;
                 height: @base-tag-item-height;
@@ -209,13 +182,6 @@ const handleDelete = (targetKey: string, action: string) => {
                 }
 
                 &:hover {
-                    .ant-tabs-tab-remove {
-                        width: 26px;
-                        opacity: 1;
-                        float: right;
-                        transition: @base-transition;
-                    }
-
                     background-color: var(--ant-primary-color-outline);
 
                     &:after {
@@ -226,15 +192,12 @@ const handleDelete = (targetKey: string, action: string) => {
             }
 
             :deep(.ant-tabs-tab-active) {
-                .ant-tabs-tab-remove {
-                    width: 26px;
-                    opacity: 1;
-                }
-
                 background: var(--ant-primary-color-outline);
+
                 &:hover {
                     background: var(--ant-primary-color-outline);
                 }
+
                 &:after {
                     width: 100%;
                     transition: @base-transition;
@@ -247,39 +210,16 @@ const handleDelete = (targetKey: string, action: string) => {
             height: @base-tag-item-height;
 
             :deep(.ant-tabs-tab) {
-                .ant-tabs-tab-remove {
-                    opacity: 0;
-                    width: 0;
-                    margin-left: 0;
-                    margin-top: 3px;
-                    line-height: 20px;
-                    vertical-align: -0.125em;
-                    text-transform: none;
-                    padding-right: 0;
-                }
-
                 height: @base-tag-item-height;
                 margin-left: 0 !important;
                 margin-right: 5px;
 
                 &:hover {
-                    .ant-tabs-tab-remove {
-                        width: 26px;
-                        opacity: 1;
-                        transition: @base-transition;
-                    }
-
                     border-color: var(--ant-primary-color);
                     border-radius: 0;
                 }
 
                 &-active {
-                    .ant-tabs-tab-remove {
-                        width: 26px;
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-
                     border-color: var(--ant-primary-color);
                     border-radius: 0;
                 }
@@ -289,32 +229,16 @@ const handleDelete = (targetKey: string, action: string) => {
         // 圆滑风格
         &-smooth {
             :deep(.ant-tabs-tab) {
-                .ant-tabs-tab-remove {
-                    opacity: 0;
-                    width: 0;
-                    margin-left: 0;
-                    margin-top: 3px;
-                    line-height: 20px;
-                    vertical-align: -0.125em;
-                    text-transform: none;
-                    padding-right: 0;
-                }
                 height: @base-tag-item-height + 2;
-                padding: 0 20px 0 20px;
-                margin-top: (@base-tabs-height - @base-tag-item-height + 3);
                 line-height: @base-tag-item-height + 2;
+                padding: 0 25px 0 25px;
+                margin-top: (@base-tabs-height - @base-tag-item-height - 3);
                 text-align: center;
                 border: 0;
                 background: transparent;
                 transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
 
                 &:hover {
-                    .ant-tabs-tab-remove {
-                        display: inline-block;
-                        width: 26px;
-                        opacity: 1;
-                        transition: @base-transition;
-                    }
                     z-index: 1999;
                     color: var(--ant-primary-color);
                     background: #dee1e6;
@@ -324,12 +248,6 @@ const handleDelete = (targetKey: string, action: string) => {
                 }
 
                 &-active {
-                    .ant-tabs-tab-remove {
-                        display: unset;
-                        width: 26px;
-                        opacity: 1;
-                    }
-
                     padding: 0 30px 0 30px;
                     color: @base-color-blue;
                     background: var(--ant-primary-color-outline);

@@ -1,4 +1,4 @@
-import { ViteEnv } from "../../../types"
+import { ViteEnv } from "../../../types/global"
 import vue from "@vitejs/plugin-vue"
 import vueJsx from "@vitejs/plugin-vue-jsx"
 import { PluginOption } from "vite"
