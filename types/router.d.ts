@@ -11,7 +11,6 @@ declare module "vue-router" {
         dynamicNewTab: boolean
         noKeepAlive: boolean
         activeMenu: boolean
-        roles: Array
         // 每个路由都必须声明
         title: string
         isCustomSvg: boolean

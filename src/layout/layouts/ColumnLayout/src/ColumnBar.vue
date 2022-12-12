@@ -40,14 +40,7 @@ const parentRoute = computed(() => {
         // 登录、404等路由不能出现在顶部菜单
         if (constantRouter.indexOf(item.path) === -1) {
             // 权限筛选
-            if (item.meta?.roles && item.meta.roles.length > 0) {
-                // 有子路由的放到顶部菜单栏
-                if (item.children && item.children.length > 0) {
-                    return true
-                }
-            } else {
-                return true
-            }
+            return true
         }
     })
 })

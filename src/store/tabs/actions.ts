@@ -1,6 +1,5 @@
 import { ActionTree } from "vuex"
-import { IState } from "@/types/IState"
-import { ITab } from "@/types/ITab"
+import { IState, ITab } from "#/index"
 import { ADD, DELETE } from "@/store/tabs/mutations"
 
 const ADD_TAB = "ADD_TAB"

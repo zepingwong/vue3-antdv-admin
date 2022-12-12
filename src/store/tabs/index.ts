@@ -1,6 +1,5 @@
 import { Module } from "vuex"
-import { IState } from "@/types/IState"
-import { ITab } from "@/types/ITab"
+import { ITab, IState } from "#/index"
 import state from "@/store/tabs/state"
 import actions from "@/store/tabs/actions"
 import getters from "@/store/tabs/getters"

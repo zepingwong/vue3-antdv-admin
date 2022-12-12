@@ -1,6 +1,5 @@
 import { Module } from "vuex"
-import { ITheme } from "#/index"
-import { IState } from "@/types/IState"
+import { ITheme, IState } from "#/index"
 
 import getters from "./getters"
 import mutations from "./mutations"

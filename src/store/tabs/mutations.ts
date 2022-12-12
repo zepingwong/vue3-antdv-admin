@@ -1,5 +1,5 @@
 import { MutationTree } from "vuex"
-import { ITab } from "@/types/ITab"
+import { ITab } from "#/tab"
 import constant from "@/router/constant"
 export const ADD = "ADD"
 export const DELETE = "DELETE"

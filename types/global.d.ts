@@ -14,3 +14,6 @@ export interface ViteEnv {
     VITE_USE_IMAGEMIN: boolean
     VITE_PORT: number
 }
+
+export type Recordable<T = any> = Record<string, T>
+export type Nullable<T> = T | null
