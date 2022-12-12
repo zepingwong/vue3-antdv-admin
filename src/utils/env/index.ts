@@ -29,6 +29,7 @@ export function getAppEnvConfig() {
         VITE_GLOB_API_URL_PREFIX,
         VITE_GLOB_UPLOAD_URL
     } = ENV
+    console.log(VITE_GLOB_APP_TITLE)
 
     if (!/^[a-zA-Z_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
         warn(
