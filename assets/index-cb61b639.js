@@ -1,0 +1,1 @@
+import{d as n,Z as o,a0 as s,$ as c}from"./vue-a5d72f0f.js";const l=n({__name:"index",setup(r){const e=[{title:"Id",dataIndex:"id"},{title:"用户名",dataIndex:"username"}],t=[{id:1,username:"test"}];return(d,_)=>{const a=c("a-table");return s(),o(a,{columns:e,"data-source":t})}}});export{l as default};
