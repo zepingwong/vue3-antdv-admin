@@ -1,5 +1,5 @@
 <template>
-    <div v-if="getShowBreadcrumb" class="leading-60px pl-10">
+    <div v-if="getShowBreadcrumb" class="leading-60px pl-6">
         <a-breadcrumb>
             <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">
                 <a-dropdown v-if="item.children && item.children.length > 1">

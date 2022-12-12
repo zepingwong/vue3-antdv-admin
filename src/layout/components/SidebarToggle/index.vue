@@ -1,7 +1,15 @@
 <template>
-    <div class="h-14px">
-        <menu-unfold-outlined v-if="store.state.theme.collapsed" class="trigger" @click="handleSwitchSidebar" />
-        <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
+    <div>
+        <menu-unfold-outlined
+            v-if="store.state.theme.collapsed"
+            class="cursor-pointer font-bold text-sm transition-colors duration-300 hover:text-primary"
+            @click="handleSwitchSidebar"
+        />
+        <menu-fold-outlined
+            v-else
+            class="cursor-pointer font-bold text-sm transition-colors duration-300 hover:text-primary"
+            @click="handleSwitchSidebar"
+        />
     </div>
 </template>
 
@@ -15,15 +23,4 @@ const handleSwitchSidebar = () => {
 }
 </script>
 
-<style lang="less" scoped>
-.trigger {
-    position: absolute;
-    font-size: 14px;
-    cursor: pointer;
-    transition: color 0.3s;
-
-    &:hover {
-        color: var(--ant-primary-color);
-    }
-}
-</style>
+<style scoped></style>

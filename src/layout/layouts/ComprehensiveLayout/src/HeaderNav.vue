@@ -1,9 +1,9 @@
 <template>
     <div class="px-8 flex">
-        <div class="leading-60px flex items-center justify-items-center">
+        <div class="flex items-center justify-items-center">
             <!--侧边栏开关-->
             <header-toggle />
-            <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal" class="pl-10">
+            <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal" class="pl-6">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
                         <a-icon :custom="item.meta.isCustomSvg" :type="item.meta.icon" />

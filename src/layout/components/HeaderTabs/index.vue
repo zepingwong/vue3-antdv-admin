@@ -1,5 +1,8 @@
 <template>
-    <div v-if="getShowTabs" class="header-tabs">
+    <div
+        v-if="getShowTabs"
+        class="header-tabs h-50px relative flex-center justify-between border-t-1 border-t-solid border-gray-500/10 px-4"
+    >
         <a-tabs
             v-model:active-key="activeKey"
             type="editable-card"
@@ -37,10 +40,11 @@
 <script lang="ts" setup>
 import AIcon from "@/components/aicon/index.vue"
 import { ref, watch, onBeforeMount } from "vue"
-import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { useStore } from "vuex"
 import { ITab } from "#/tab"
 import { useThemeSetting, useTabs } from "@/hooks"
+
 const { getTabList, deleteOneTab, initAffixTabs, addOneTab, clickTab } = useTabs()
 const { getTabsBarStyle, getShowTabs, getShowTabsBarIcon } = useThemeSetting()
 
@@ -101,16 +105,7 @@ watch(
 
 <style scoped lang="less">
 .header-tabs {
-    height: @base-tabs-height;
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
     background-color: #fff;
-    padding: 0 24px;
-    border-top: 1px solid #f6f6f6;
 
     :deep(.ant-tabs-nav) {
         margin: 0;

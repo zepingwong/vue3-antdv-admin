@@ -15,10 +15,18 @@ export const configUnocssPlugin = () => {
         },
         theme: {
             colors: {
-                primary: "var(--primary-color)"
+                primary: "var(--ant-primary-color)"
             },
             backgroundColor: {},
             transitionProperty: []
-        }
+        },
+        rules: [
+            [
+                /^text-(.*)$/,
+                ([, c], { theme }) => {
+                    if (theme.colors[c]) return { color: theme.colors[c] }
+                }
+            ]
+        ]
     })
 }
