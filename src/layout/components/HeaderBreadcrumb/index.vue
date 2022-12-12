@@ -1,28 +1,28 @@
 <template>
-    <div v-if="getShowBreadcrumb" class="header-breadcrumb">
+    <div v-if="getShowBreadcrumb" class="leading-60px pl-10">
         <a-breadcrumb>
             <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">
                 <a-dropdown v-if="item.children && item.children.length > 1">
-                    <a class="header-breadcrumb__dropdown">
+                    <a>
                         <a-icon
                             v-if="getShowBreadcrumbIcon"
-                            class="header-breadcrumb__icon"
+                            class="text-sm font-bold"
                             :custom="item.meta.isCustomSvg"
                             :type="item.meta.icon"
                         />
-                        <span class="header-breadcrumb__title">{{ item.meta.title }}</span>
-                        <a-icon class="header-breadcrumb__dropdown-arrow" type="down-outlined" />
+                        <span class="font-bold text-sm pl-1">{{ item.meta.title }}</span>
+                        <a-icon class="pl-1 font-bold group-hover:rotate-x-180" type="down-outlined" />
                     </a>
                     <template #overlay>
                         <a-menu>
                             <a-menu-item v-for="menu in item.children" :key="menu.name">
                                 <a-icon
                                     v-if="getShowBreadcrumbIcon"
-                                    class="header-breadcrumb__icon"
+                                    class="font-bold text-sm"
                                     :custom="menu.meta.isCustomSvg"
                                     :type="menu.meta.icon"
                                 />
-                                <span class="header-breadcrumb__menu-title">{{ menu.meta.title }}</span>
+                                <span class="pl-1 font-bold text-sm">{{ menu.meta.title }}</span>
                             </a-menu-item>
                         </a-menu>
                     </template>
@@ -30,11 +30,11 @@
                 <template v-else>
                     <a-icon
                         v-if="getShowBreadcrumbIcon"
-                        class="header-breadcrumb__icon"
+                        class="text-sm font-bold"
                         :custom="item.meta.isCustomSvg"
                         :type="item.meta.icon"
                     />
-                    <span class="header-breadcrumb__title">{{ item.meta.title }}</span>
+                    <span class="font-bold text-sm pl-1">{{ item.meta.title }}</span>
                 </template>
             </a-breadcrumb-item>
         </a-breadcrumb>
@@ -45,50 +45,10 @@
 import { useRoute } from "vue-router"
 import AIcon from "@/components/aicon/index.vue"
 import { useThemeSetting } from "@/hooks"
-import { onMounted } from "vue"
 
 const { getShowBreadcrumbIcon, getShowBreadcrumb } = useThemeSetting()
 
 const route = useRoute()
-onMounted(() => {
-    console.log(route)
-})
 </script>
 
-<style lang="less" scoped>
-.header-breadcrumb {
-    height: @base-top-bar-height;
-    line-height: @base-top-bar-height;
-    padding-left: 30px;
-
-    .ant-breadcrumb {
-        line-height: @base-top-bar-height;
-        :deep(.ant-breadcrumb-link) {
-            height: 14px;
-        }
-    }
-    &__title {
-        font-weight: bold;
-        font-size: 14px;
-        padding-left: 5px;
-    }
-    &__icon {
-        font-weight: bold;
-        font-size: 14px;
-    }
-    &__dropdown {
-        &-arrow {
-            padding-left: 10px;
-        }
-        &:hover {
-            .header-breadcrumb__dropdown-arrow {
-                transform: rotateX(180deg);
-                transition: transform 1s;
-            }
-        }
-    }
-    &__menu-title {
-        padding-left: 5px;
-    }
-}
-</style>
+<style scoped></style>
