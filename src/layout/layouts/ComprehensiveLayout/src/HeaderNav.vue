@@ -1,9 +1,9 @@
 <template>
-    <div class="header-nav">
-        <div class="left-panel">
+    <div class="px-8 flex">
+        <div class="leading-60px flex items-center justify-items-center">
             <!--侧边栏开关-->
             <header-toggle />
-            <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
+            <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal" class="pl-10">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
                         <a-icon :custom="item.meta.isCustomSvg" :type="item.meta.icon" />
@@ -13,7 +13,7 @@
             </a-menu>
         </div>
 
-        <div class="right-panel">
+        <div class="leading-60px ml-auto flex items-center justify-end">
             <!--主题设置-->
             <theme-drawer />
             <!--用户头像-->
@@ -44,35 +44,4 @@ watch(
 )
 </script>
 
-<style lang="less" scoped>
-.header-nav {
-    height: @base-top-bar-height;
-    box-sizing: border-box;
-    display: flex;
-    padding: 0 24px;
-
-    .left-panel {
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        line-height: @base-top-bar-height;
-        box-sizing: border-box;
-        :deep(.ant-menu-item) {
-            margin-top: -2px;
-        }
-        :deep(.ant-menu-horizontal) {
-            border-bottom: 0;
-        }
-    }
-
-    .right-panel {
-        line-height: @base-top-bar-height;
-        position: absolute;
-        right: 24px;
-        display: flex;
-        align-content: center;
-        align-items: center;
-        justify-content: flex-end;
-    }
-}
-</style>
+<style scoped></style>

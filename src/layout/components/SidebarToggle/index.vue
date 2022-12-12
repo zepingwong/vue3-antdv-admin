@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-14px">
         <menu-unfold-outlined v-if="store.state.theme.collapsed" class="trigger" @click="handleSwitchSidebar" />
         <menu-fold-outlined v-else class="trigger" @click="handleSwitchSidebar" />
     </div>
@@ -8,6 +8,7 @@
 <script lang="ts" setup>
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue"
 import { useStore } from "vuex"
+
 const store = useStore()
 const handleSwitchSidebar = () => {
     store.dispatch("theme/SWITCH_SIDEBAR")
@@ -16,8 +17,8 @@ const handleSwitchSidebar = () => {
 
 <style lang="less" scoped>
 .trigger {
+    position: absolute;
     font-size: 14px;
-    line-height: 56px;
     cursor: pointer;
     transition: color 0.3s;
 

@@ -15,6 +15,7 @@
     "less-loader": "^11.1.0",
     "picocolors": "^1.0.0",
     "pkg-types": "^1.0.1",
+    "unocss": "^0.47.5",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"

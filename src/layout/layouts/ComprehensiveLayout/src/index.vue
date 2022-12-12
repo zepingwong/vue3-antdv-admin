@@ -34,4 +34,4 @@ import { useStore } from "vuex"
 const store = useStore()
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="less"></style>
