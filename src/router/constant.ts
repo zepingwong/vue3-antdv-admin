@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router"
 // 基础路由
 const constant: RouteRecordRaw[] = [
     {
-        path: "/login",
+        path: "/Login",
         name: "Login",
         component: () => import("@/views/Login/index.vue"),
         meta: {
@@ -24,4 +24,4 @@ const constant: RouteRecordRaw[] = [
 
 export default constant
 
-export const constantRouter = ["/login"]
+export const constantRouter = ["/Login"]

@@ -26,7 +26,7 @@ instance.interceptors.request.use((config) => {
     Spin.setDefaultIndicator({
         indicator: h("body", { class: "anticon anticon-loading anticon-spin ant-spin-dot" })
     })
-    if (config.url !== "/admin/login") {
+    if (config.url !== "/admin/Login") {
         if (config.headers) {
             config.headers["access-token"] = store.state.user.token
         }
@@ -77,7 +77,7 @@ const handleData = async ({
             return data
         }
         case 401: {
-            await router.push({ path: "/login", replace: true })
+            await router.push({ path: "/Login", replace: true })
             break
         }
     }

@@ -17,7 +17,7 @@ export const defaultCommon = {
     // 缓存路由的最大数量
     keepAliveMaxNum: 20,
     // 不经过token校验的路由，白名单路由建议配置到与login页面同级，如果需要放行带传参的页面，请使用query传参，配置时只配置path即可
-    routesWhiteList: ["/login", "/register", "/callback", "/404", "/403"],
+    routesWhiteList: ["/Login", "/register", "/callback", "/404", "/403"],
     // 加载时显示文字
     loadingText: "",
     // token名称

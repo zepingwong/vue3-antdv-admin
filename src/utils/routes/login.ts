@@ -7,11 +7,11 @@ import { system } from "@/config"
 export default (currentPath: string) => {
     if (system.recordRoute && currentPath !== "/") {
         return {
-            path: "/login",
+            path: "/Login",
             query: { redirect: currentPath },
             replace: true
         }
     } else {
-        return { path: "/login", replace: true }
+        return { path: "/Login", replace: true }
     }
 }
