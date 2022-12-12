@@ -1,0 +1,1 @@
+import{a4 as e,a0 as o}from"./vue-a5d72f0f.js";import{_ as r}from"./index-41433fb4.js";import"./antdv-fc0cf260.js";const t={};function c(n,a){return o(),e("div",null,"首页")}const f=r(t,[["render",c]]);export{f as default};
