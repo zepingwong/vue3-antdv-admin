@@ -1,10 +1,9 @@
 <template>
-    <div class="theme__drawer"></div>
     <a-tooltip placement="bottom" @click="switchThemeDrawerStatus()">
         <template #title>
             <span>主题设置</span>
         </template>
-        <a-icon class="theme__drawer-trigger" custom type="icon-theme" />
+        <a-icon class="text-xl px-8" custom type="icon-theme" />
     </a-tooltip>
     <a-drawer :visible="getThemeDrawerStatus" title="主题配置" width="450" @close="switchThemeDrawerStatus()">
         <a-form :model="theme">
@@ -34,28 +33,28 @@
             <a-form-item label="布局">
                 <a-radio-group
                     :value="getLayout"
-                    class="layout-radio-group"
+                    class="layout-radio-group w-full"
                     @change="(val) => switchLayout(val.target.value)"
                 >
                     <a-row :gutter="8">
                         <a-col :span="12">
-                            <a-radio-button value="Vertical">
+                            <a-radio-button class="h-140px p-0 text-center" value="Vertical">
                                 纵向布局
-                                <zongxiangbuju class="radio__button-icon" />
+                                <zongxiangbuju class="radio__button-icon w-160px" />
                             </a-radio-button>
                         </a-col>
                         <a-col :span="12">
-                            <a-radio-button value="Comprehensive">
+                            <a-radio-button class="h-140px p-0 text-center" value="Comprehensive">
                                 综合布局
-                                <zonghebuju class="radio__button-icon" />
+                                <zonghebuju class="radio__button-icon w-160px" />
                             </a-radio-button>
                         </a-col>
                     </a-row>
                     <a-row :gutter="8" style="padding-top: 8px">
                         <a-col :span="12">
-                            <a-radio-button value="Column">
+                            <a-radio-button class="h-140px p-0 text-center" value="Column">
                                 分栏布局
-                                <fenlanbuju class="radio__button-icon" />
+                                <fenlanbuju class="radio__button-icon w-160px" />
                             </a-radio-button>
                         </a-col>
                     </a-row>
@@ -128,44 +127,12 @@ const store = useStore()
 const theme = computed<ITheme>(() => store.state.theme)
 </script>
 
-<style scoped lang="less">
-.layout-radio-group {
-    width: 100%;
-
-    :deep(.ant-radio-button-wrapper) {
-        height: 140px;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-        display: flex;
-
-        .ant-radio-button {
-            text-align: center;
-        }
-
-        .radio__button-icon {
-            width: 160px;
-            align-self: center;
-
-            svg {
-                height: 0.65em;
-            }
-        }
-    }
-}
-
+<style scoped >
 :deep(.ant-form-item-control) {
     text-align: right;
 }
 
 :deep(.ant-select-selection-item) {
     text-align: center;
-}
-
-.theme__drawer {
-    &-trigger {
-        font-size: 20px;
-        padding: 0 20px;
-    }
 }
 </style>

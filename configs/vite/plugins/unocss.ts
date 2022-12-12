@@ -15,7 +15,8 @@ export const configUnocssPlugin = () => {
         },
         theme: {
             colors: {
-                primary: "var(--ant-primary-color)"
+                primary: "var(--ant-primary-color)",
+                "primary_outline": "var(--ant-primary-color-outline)"
             },
             backgroundColor: {},
             transitionProperty: []

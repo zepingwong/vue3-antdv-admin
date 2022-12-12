@@ -5,7 +5,7 @@
             d="M311.6,0H3.3C1.5,0,0,1.5,0,3.3v193.2c0,1.9,1.5,3.3,3.3,3.3h308.3c1.8,0,3.3-1.5,3.3-3.3V3.3 C314.9,1.5,313.4,0,311.6,0z"
         />
         <path class="st1" d="M65.6,0H3.4C1.5,0,0,1.5,0,3.4v192.7c0,2.1,1.5,3.9,3.3,3.9h62.3L65.6,0z" />
-        <rect y="42.8" class="st2" width="65.6" height="11.6" />
+        <rect y="42.8" class="fill-primary" width="65.6" height="11.6" />
         <path
             class="st3"
             d="M308.3,43.8H72.2v149.4h236.2V43.8z M314.9,25.2H65.6V0h245.7c2,0,3.7,1.6,3.7,3.7L314.9,25.2z"
@@ -217,30 +217,26 @@
  c0.2,0.3,0.3,0.7,0.4,0.9L30.2,102.8z M33.2,103.7c-0.3,0-0.1-2.8-0.1-3h-1.9c0,1,0.2,2.3-0.6,3.2c0.1,0,0.3,0.2,0.4,0.3
  c0.8-0.8,0.7-2,0.7-3h0.9c-0.7,4.3,2.1,3,0.8,1.6C33.4,103,33.6,103.8,33.2,103.7L33.2,103.7z"
         />
-        <rect x="73.3" y="29.2" class="st5" width="25.8" height="10.6" />
+        <rect x="73.3" y="29.2" class="fill-primary_outline" width="25.8" height="10.6" />
         <rect x="103.1" y="29.2" class="st3" width="25.8" height="10.6" />
         <path
             class="st0"
             d="M292.5,13.5c0,4.4,3.5,7.9,7.9,7.9c4.4,0,7.9-3.5,7.9-7.9c0,0,0,0,0,0c0-4.4-3.5-7.9-7.9-7.9
  C296.1,5.6,292.5,9.2,292.5,13.5C292.5,13.5,292.5,13.5,292.5,13.5z"
         />
-        <text transform="matrix(1 0 0 1 76.3212 36.489)" class="st2 st6 st7">二级导航</text>
+        <text transform="matrix(1 0 0 1 76.3212 36.489)" class="fill-primary st6 st7">二级导航</text>
     </svg>
 </template>
 
 <script lang="ts" setup></script>
 
-<style scoped lang="less">
+<style scoped>
 .st0 {
     fill: #e5e9f2;
 }
 
 .st1 {
     fill: #001529;
-}
-
-.st2 {
-    fill: var(--ant-primary-color);
 }
 
 .st3 {
@@ -250,11 +246,6 @@
 .st4 {
     fill: #99a9bf;
 }
-
-.st5 {
-    fill: var(--ant-primary-color-outline);
-}
-
 .st6 {
     font-family: "SimHei", serif;
 }
