@@ -1,0 +1,1 @@
+window.__PRODUCTION__VUE_VBEN_ADMIN__CONF__={"VITE_GLOB_APP_TITLE":"Vben Admin","VITE_GLOB_APP_SHORT_NAME":"vue_vben_admin"};Object.freeze(window.__PRODUCTION__VUE_VBEN_ADMIN__CONF__);Object.defineProperty(window,"__PRODUCTION__VUE_VBEN_ADMIN__CONF__",{configurable:false,writable:false,});
