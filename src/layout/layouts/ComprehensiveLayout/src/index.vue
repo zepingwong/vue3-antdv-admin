@@ -1,21 +1,23 @@
 <!--综合布局 -->
 <template>
-    <a-layout class="layout-comprehensive">
+    <a-layout class="h-full">
         <a-layout-sider v-model:collapsed="store.state.theme.collapsed" :trigger="null" collapsible>
             <sidebar-menu />
         </a-layout-sider>
         <a-layout>
             <!--头部-->
             <a-layout-header
+                class="p-0 bg-white"
                 :class="{
-                    'ant-layout-header-tabs': getShowTabs
+                    '!h-114px': getShowTabs,
+                    '!h-64px': !getShowTabs
                 }"
             >
                 <header-nav />
                 <header-tabs />
             </a-layout-header>
             <!--内容-->
-            <a-layout-content>
+            <a-layout-content class="mx-6 my-5 p-6 bg-white">
                 <main-content />
             </a-layout-content>
         </a-layout>
@@ -28,10 +30,10 @@ import HeaderTabs from "@/layout/components/HeaderTabs/index.vue"
 import SidebarMenu from "@/layout/components/SidebarMenu/index.vue"
 import MainContent from "@/layout/components/MainContent/index.vue"
 import { useThemeSetting } from "@/hooks"
-const { getShowTabs } = useThemeSetting()
 import { useStore } from "vuex"
+const { getShowTabs } = useThemeSetting()
 
 const store = useStore()
 </script>
 
-<style scoped ></style>
+<style scoped></style>

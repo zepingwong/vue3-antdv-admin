@@ -1,5 +1,5 @@
 <template>
-    <div class="login-container">
+    <div class="flex h-full">
         <a-form
             :model="loginForm"
             layout="vertical"
@@ -65,10 +65,4 @@ const handleLogin = () => {
 }
 </script>
 
-<style lang="stylus" scoped>
-.login-container {
-  display flex
-  height 100%
-  background-color #f9f9f9
-}
-</style>
+<style scoped></style>

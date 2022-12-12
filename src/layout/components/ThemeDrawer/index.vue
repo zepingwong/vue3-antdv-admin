@@ -8,7 +8,11 @@
     <a-drawer :visible="getThemeDrawerStatus" title="主题配置" width="450" @close="switchThemeDrawerStatus()">
         <a-form :model="theme">
             <a-form-item label="主题">
-                <a-radio-group :value="getTheme" button-style="solid" @change="(val) => switchTheme(val.target.value)">
+                <a-radio-group
+                    :value="getTheme"
+                    button-style="solid"
+                    @change="(val: RadioChangeEvent) => switchTheme(val.target.value)"
+                >
                     <a-radio-button
                         value="blue"
                         :style="{ color: getTheme === 'blue' ? '#ffffff' : blue.color.primaryColor }"
@@ -34,7 +38,7 @@
                 <a-radio-group
                     :value="getLayout"
                     class="layout-radio-group w-full"
-                    @change="(val) => switchLayout(val.target.value)"
+                    @change="(val: RadioChangeEvent) => switchLayout(val.target.value)"
                 >
                     <a-row :gutter="8">
                         <a-col :span="12">
@@ -64,7 +68,7 @@
                 <a-switch :checked="getShowTabs" @change="switchShowTabs" />
             </a-form-item>
             <a-form-item v-if="getShowTabs" label="标签栏风格">
-                <a-select :value="getTabsBarStyle" @change="(val) => switchTabsBarStyle(val)">
+                <a-select :value="getTabsBarStyle" @change="(val: ITabsBarStyle) => switchTabsBarStyle(val)">
                     <a-select-option value="smooth">圆滑风格</a-select-option>
                     <a-select-option value="card">卡片风格</a-select-option>
                     <a-select-option value="smart">灵动风格</a-select-option>
@@ -81,7 +85,7 @@
             </a-form-item>
 
             <a-form-item v-if="getColumnStyle && getLayout === 'Column'" label="分栏风格">
-                <a-select :value="getColumnStyle" @change="(val) => switchColumnStyle(val)">
+                <a-select :value="getColumnStyle" @change="(val: string) => switchColumnStyle(val)">
                     <a-select-option value="vertical">纵向</a-select-option>
                     <a-select-option value="horizontal">横向</a-select-option>
                     <a-select-option value="card">卡片</a-select-option>
@@ -96,12 +100,13 @@
 import AIcon from "@/components/aicon/index.vue"
 import { computed } from "vue"
 import { useStore } from "vuex"
-import { ITheme } from "#/index"
+import { ITheme, ITabsBarStyle } from "#/index"
 import { useThemeSetting } from "@/hooks"
 import Zongxiangbuju from "@/layout/components/ThemeDrawer/zongxiangbuju.vue"
 import Zonghebuju from "@/layout/components/ThemeDrawer/zonghebuju.vue"
 import Fenlanbuju from "@/layout/components/ThemeDrawer/fenlanbuju.vue"
-import { blue, green, red } from "../../../../configs/theme"
+import { blue, green, red } from "$/theme"
+import { RadioChangeEvent } from "ant-design-vue/es/radio"
 
 const {
     getTheme,
@@ -127,7 +132,7 @@ const store = useStore()
 const theme = computed<ITheme>(() => store.state.theme)
 </script>
 
-<style scoped >
+<style scoped>
 :deep(.ant-form-item-control) {
     text-align: right;
 }

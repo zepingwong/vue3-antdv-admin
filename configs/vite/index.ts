@@ -76,7 +76,7 @@ export async function createViteConfig(
             rollupOptions: {
                 output: {
                     manualChunks: {
-                        vue: ["vue", "pinia", "vue-router"]
+                        vue: ["vue", "vue-router"]
                     }
                 }
             }

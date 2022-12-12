@@ -1,14 +1,7 @@
 <template>
-  <div class="logo" />
+    <div class="h-64px p-4" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup></script>
 
-</script>
-
-<style lang="stylus" scoped>
-.logo {
-  height 60px
-  padding 16px
-}
-</style>
+<style scoped></style>

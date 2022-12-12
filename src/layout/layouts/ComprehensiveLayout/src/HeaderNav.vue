@@ -6,8 +6,12 @@
             <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal" class="pl-6">
                 <a-menu-item v-for="item in parentRoute" :key="item.name">
                     <router-link :to="item.path">
-                        <a-icon :custom="item.meta.isCustomSvg" :type="item.meta.icon" />
-                        {{ item.meta.title }}
+                        <a-icon
+                            v-if="item.meta && item.meta.icon"
+                            :custom="item.meta.isCustomSvg"
+                            :type="item.meta.icon"
+                        />
+                        {{ item?.meta?.title }}
                     </router-link>
                 </a-menu-item>
             </a-menu>

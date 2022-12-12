@@ -9,8 +9,8 @@
             :tab-bar-gutter="-16"
             hide-add
             :class="`header-tabs-content-${getTabsBarStyle}`"
-            @tab-click="(val) => clickTab(val)"
-            @edit="(val) => deleteOneTab(val)"
+            @tab-click="(val: string) => clickTab(val)"
+            @edit="(val: string) => deleteOneTab(val)"
         >
             <a-tab-pane v-for="(item, index) in getTabList" :key="item.name" :closable="item.affix !== true">
                 <template #closeIcon>

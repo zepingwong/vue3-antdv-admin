@@ -2,10 +2,9 @@ import { computed } from "vue"
 import store from "@/store"
 import { SET_THEME_DRAWER } from "@/store/theme/mutations"
 import { SET_THEME } from "@/store/theme/actions"
-import { themeSettings } from "../../../configs/theme"
 import { ILayout, ITabsBarStyle, IThemeName } from "#/config"
 import { ConfigProvider } from "ant-design-vue"
-import { green, red, blue } from "../../../configs/theme"
+import { green, red, blue, themeSettings } from "$/theme"
 
 export const useThemeSetting = () => {
     // 主题
@@ -35,7 +34,7 @@ export const useThemeSetting = () => {
     }
     // 布局
     const getLayout = computed<ILayout>(() => store.state.theme.config.layout || themeSettings.layout)
-    const switchLayout = (layout: ILayout) => {
+    const switchLayout = (layout: ILayout | string) => {
         store.dispatch("theme/" + SET_THEME, { layout }).then()
     }
     // 标签栏

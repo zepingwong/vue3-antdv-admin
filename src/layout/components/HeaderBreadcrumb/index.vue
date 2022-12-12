@@ -17,12 +17,12 @@
                         <a-menu>
                             <a-menu-item v-for="menu in item.children" :key="menu.name">
                                 <a-icon
-                                    v-if="getShowBreadcrumbIcon"
+                                    v-if="getShowBreadcrumbIcon && menu?.meta?.icon"
                                     class="font-bold text-sm"
-                                    :custom="menu.meta.isCustomSvg"
+                                    :custom="menu?.meta?.isCustomSvg"
                                     :type="menu.meta.icon"
                                 />
-                                <span class="pl-1 font-bold text-sm">{{ menu.meta.title }}</span>
+                                <span class="pl-1 font-bold text-sm">{{ menu?.meta?.title }}</span>
                             </a-menu-item>
                         </a-menu>
                     </template>
@@ -34,7 +34,7 @@
                         :custom="item.meta.isCustomSvg"
                         :type="item.meta.icon"
                     />
-                    <span class="font-bold text-sm pl-1">{{ item.meta.title }}</span>
+                    <span class="font-bold text-sm pl-1">{{ item?.meta?.title }}</span>
                 </template>
             </a-breadcrumb-item>
         </a-breadcrumb>

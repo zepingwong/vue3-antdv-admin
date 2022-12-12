@@ -17,10 +17,11 @@ import zhCN from "ant-design-vue/es/locale/zh_CN"
 import { useStore } from "vuex"
 import { useRoute } from "vue-router"
 import { useThemeSetting } from "@/hooks"
-
-const { getLayout, getTheme, switchTheme } = useThemeSetting()
 import { constantRouter } from "@/router/constant"
 import { onMounted } from "vue"
+
+const { getLayout, getTheme, switchTheme } = useThemeSetting()
+
 onMounted(() => {
     switchTheme(getTheme.value)
 })
