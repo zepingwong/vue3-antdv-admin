@@ -40,7 +40,6 @@ export async function createViteConfig(
             }
         },
         define: {
-            __VITE_USE_MOCK__: VITE_USE_MOCK,
             // Suppress vue-i18-next warning
             __INTLIFY_PROD_DEVTOOLS__: false,
             __APP_INFO__: JSON.stringify({
@@ -59,10 +58,6 @@ export async function createViteConfig(
         },
         css: {
             preprocessorOptions: {
-                stylus: {
-                    // https://stackoverflow.com/questions/73228198/global-variables-stylus-vue-vite
-                    additionalData: `@import "${resolve(root, "src/style/variables.styl")}"`
-                },
                 less: {
                     javascriptEnabled: true,
                     additionalData: `@import "${resolve(root, "src/assets/css/global.less")}";`
