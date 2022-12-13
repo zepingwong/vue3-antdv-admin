@@ -19,7 +19,7 @@ export function getAppEnvConfig() {
     ENV_NAME = getConfigFileName(import.meta.env)
     console.log("test")
     console.log(ENV_NAME)
-    console.log(import.meta.env.DEV)
+    console.log(window[ENV_NAME as any])
     const ENV = (import.meta.env.DEV
         ? // Get the global configuration (the configuration will be extracted independently when packaging)
           (import.meta.env as unknown as GlobEnvConfig)
