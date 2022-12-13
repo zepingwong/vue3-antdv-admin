@@ -1,1 +1,0 @@
-import{a4 as e,a0 as r}from"./vue-a5d72f0f.js";import{_ as o}from"./index-272393c2.js";import"./antdv-fc0cf260.js";const c={};function t(n,a){return r(),e("div",null,"工作台")}const m=o(c,[["render",t]]);export{m as default};
