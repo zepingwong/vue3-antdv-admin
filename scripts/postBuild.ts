@@ -8,7 +8,7 @@ import pkg from "../package.json"
 export const runBuild = async () => {
     try {
         const argvList = process.argv.splice(2)
-
+        console.log(argvList)
         // Generate configuration file
         if (!argvList.includes("disabled-config")) {
             runBuildConfig()
