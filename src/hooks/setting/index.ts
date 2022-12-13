@@ -12,7 +12,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
         VITE_GLOB_API_URL_PREFIX,
         VITE_GLOB_UPLOAD_URL
     } = getAppEnvConfig()
-    console.log(getAppEnvConfig())
 
     if (!/[a-zA-Z_]*/.test(VITE_GLOB_APP_SHORT_NAME)) {
         warn(
