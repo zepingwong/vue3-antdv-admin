@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode development",
-    "build": "cross-env NODE_ENV=production vite build --mode production && esno ./scripts/postBuild.ts",
+    "build": "vue-tsc --noEmit && vite build --mode production",
     "preview": "vite preview"
   },
   "dependencies": {
