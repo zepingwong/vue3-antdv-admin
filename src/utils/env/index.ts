@@ -15,7 +15,9 @@ export function getStorageShortName() {
 }
 
 export function getAppEnvConfig() {
-    const ENV_NAME = getConfigFileName(import.meta.env)
+    let ENV_NAME = getConfigFileName(import.meta.env)
+    ENV_NAME = getConfigFileName(import.meta.env)
+    console.log("test")
     console.log(ENV_NAME)
     console.log(import.meta.env.DEV)
     const ENV = (import.meta.env.DEV
